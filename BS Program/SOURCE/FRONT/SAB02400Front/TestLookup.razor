@@ -1,0 +1,18 @@
+﻿@inherits R_Page
+@attribute [R_Page(Title = "Test Lookup")]
+
+<h3>TestPopup</h3>
+
+<R_Button OnClick="@OnClose">Close</R_Button>
+
+@code {
+    protected override Task R_Init_From_Master(object poParameter)
+    {
+        return base.R_Init_From_Master(poParameter);
+    }
+
+    private async Task OnClose()
+    {
+        await this.Close(true, "sihol");
+    }
+}

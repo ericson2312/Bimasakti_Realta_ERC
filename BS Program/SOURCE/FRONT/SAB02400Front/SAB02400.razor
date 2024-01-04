@@ -1,0 +1,96 @@
+﻿
+@inherits R_Page
+
+<h3>SAB02400</h3>
+
+<R_StackLayout>
+    <R_GroupBox Title="Read Excel">
+        <R_Grid @ref="@_gridRef"
+                DataSource="@_viewModel.UserList"
+                Pageable="true"
+                R_ConductorGridSource="@_conGridEmployeeRef"
+                R_GridType="@R_eGridType.Batch"
+                AllowAddNewRow="true"
+                AllowEditRow="true"
+                AllowDeleteRow="true"
+                R_ServiceGetListRecord="@R_ServiceGetListRecord"
+                R_Before_Open_Grid_Lookup="@R_Before_Open_Grid_Lookup"
+                R_After_Open_Grid_Lookup="@R_After_Open_Grid_Lookup">
+            <R_GridColumns>
+                <R_GridTextColumn FieldName="@nameof(UserDTO.Id)"
+                                  HeaderText="User Id" R_EnableAdd />
+
+                <R_GridTextColumn FieldName="@nameof(UserDTO.FirstName)"
+                                  HeaderText="First Name" 
+                                  R_EnableAdd 
+                                  R_EnableEdit />
+
+                <R_GridComboBoxColumn Data="@_viewModel.GenderList"
+                                          ValueField="@nameof(GenderDTO.Code)"
+                                          TextField="@nameof(GenderDTO.Description)"
+                                          FieldName="@nameof(UserDTO.Gender)"
+                                          HeaderText="Gender" 
+                                          R_EnableAdd 
+                                          R_EnableEdit />
+
+                @*<R_GridLookupColumn FieldName="@nameof(UserDTO.FirstName)"
+                                    HeaderText="First Name Lookup 1" Name="FirstName1"
+                                    R_EnableAdd 
+                                    R_EnableEdit />
+
+                <R_GridLookupColumn FieldName="@nameof(UserDTO.FirstName)"
+                                    HeaderText="First Name Lookup 2" Name="FirstName2"
+                                                R_EnableAdd
+                                                R_EnableEdit />*@
+            </R_GridColumns>
+        </R_Grid>
+
+        <R_Button R_ConductorGridSource="@_conGridEmployeeRef" R_EnableHasData OnClick="@OnClickBatch">
+            Save Batch
+        </R_Button>
+        @*
+        <R_FileSelect AllowedExtensions="@_viewModel.AllowedExtensions" OnSelect="@OnSelect" />*@
+    </R_GroupBox>
+    
+    <br />
+    <br />
+
+    <R_GroupBox Title="Write Excel">
+        <R_StackLayout Row>
+            <R_ItemLayout>
+                <R_Button R_ConductorGridSource="@_conGridEmployeeRef" OnClick="@OnClickGenerate">
+                    Generate Data
+                </R_Button>
+            </R_ItemLayout>
+
+            <R_ItemLayout>
+                <R_Button R_ConductorGridSource="@_conGridEmployeeRef" OnClick="@OnClickWriteExcel">
+                    Write Excel
+                </R_Button>
+            </R_ItemLayout>
+
+            <R_ItemLayout>
+                <R_Button R_ConductorGridSource="@_conGridEmployeeRef" OnClick="@OnClickGrouping">
+                    Group By Gender
+                </R_Button>
+            </R_ItemLayout>
+        </R_StackLayout>
+    </R_GroupBox>
+
+    <br />
+    <br />
+
+    <R_Button R_ConductorGridSource="@_conGridEmployeeRef" OnClick="@OnClickErrorSP">
+        Error Stored Procedure
+    </R_Button>
+</R_StackLayout>
+
+<R_ConductorGrid @ref="@_conGridEmployeeRef"
+                 R_ViewModel="@_viewModel"
+                 R_IsHeader
+                 R_Display="@R_Display"
+                 R_ServiceGetRecord="@R_ServiceGetRecord"
+                 R_AfterAdd="@R_AfterAdd" 
+                 R_BeforeSaveBatch="@R_BeforeSaveBatch" 
+                 R_ServiceSaveBatch="@R_ServiceSaveBatch" 
+                 R_AfterSaveBatch="@R_AfterSaveBatch" />

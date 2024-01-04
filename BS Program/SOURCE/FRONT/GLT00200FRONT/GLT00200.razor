@@ -1,0 +1,299 @@
+﻿@page "/GLT00200"
+@inherits R_Page
+@using GLT00200COMMON.DTOs.GLT00200
+@using GLT00200MODEL
+
+<R_StackLayout>
+    <R_GroupBox Title="@_localizer["_ImportFile"]"  ShowBorder>
+        <R_StackLayout Row>
+            <R_ItemLayout col="5">
+                <R_CheckBox Value="@loImportJournalViewModel.IsSeparateDCAmount"
+                            R_ConductorSource="@_conductorImportJournalRef"
+                            ValueChanged="((bool value) => ChechBoxValueChanged(value))">
+                </R_CheckBox>
+                <R_Label>
+                    @_localizer["_SeparateDCAmount"]
+                </R_Label>
+            </R_ItemLayout>
+        </R_StackLayout>
+        <R_StackLayout Row>
+            <R_ItemLayout col="1">
+                <R_Label>@_localizer["_FileName"]</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout col="4">
+                <R_TextBox @bind-Value="@loImportJournalViewModel.lcFileName"
+                           R_ConductorSource="@_conductorImportJournalRef"
+                           ReadOnly>
+                </R_TextBox>
+            </R_ItemLayout>
+            <R_ItemLayout col="1">
+                <R_OpenFileDialogButton OnChange="@InputFileOnChange" Accepts="@accepts">@_localizer["_ChooseFile"]</R_OpenFileDialogButton>
+            </R_ItemLayout>
+            <R_ItemLayout col="1">
+                <R_Button R_ConductorSource="_conductorImportJournalRef" OnClick="OnClickTemplate">@_localizer["_Template"]</R_Button>
+            </R_ItemLayout>
+        </R_StackLayout>
+    </R_GroupBox>
+
+    <R_GroupBox Title="@_localizer["_JournalDescription"]" ShowBorder>
+        <R_StackLayout Row>
+            <R_ItemLayout col="5">
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_Department"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="4">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CDEPT_CODE"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_ReferenceNo"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="4">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CREF_NO"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                        <R_Label>@_localizer["_Date"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="3">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CREF_DATE"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_DocumentNo"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="4">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CDOC_NO"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                        <R_Label>@_localizer["_Date"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="3">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CDOC_DATE"
+                                     R_ConductorSource="@_conductorImportJournalRef"
+                                     Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+            </R_ItemLayout>
+
+            <R_ItemLayout col="5">
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_Currency"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CCURRENCY_CODE"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3"></R_ItemLayout>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_BaseRate"]</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1"></R_ItemLayout>
+                    <R_ItemLayout col="4">
+                        <R_Label>@_localizer["_CurrencyRate"]</R_Label>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_LocalCurrency"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">
+                        <R_NumericTextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.NLBASE_RATE"
+                                          R_ConductorSource="@_conductorImportJournalRef"
+                                          Enabled=false
+                                          Arrows=false>
+                        </R_NumericTextBox>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CCURRENCY_CODE"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">
+                        <R_NumericTextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.NLCURRENCY_RATE"
+                                          R_ConductorSource="@_conductorImportJournalRef"
+                                          Arrows=false
+                                          Enabled=false>
+                        </R_NumericTextBox>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CLOCAL_CURRENCY_CODE"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_BaseCurrency"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">
+                        <R_NumericTextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.NBBASE_RATE"
+                                          R_ConductorSource="@_conductorImportJournalRef"
+                                          Arrows=false
+                                          Enabled=false>
+                        </R_NumericTextBox>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CCURRENCY_CODE"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">   
+                        <R_NumericTextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.NBCURRENCY_RATE"
+                                          R_ConductorSource="@_conductorImportJournalRef"
+                                          Arrows=false
+                                          Enabled=false>
+                        </R_NumericTextBox>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CBASE_CURRENCY_CODE"
+                                   R_ConductorSource="@_conductorImportJournalRef"
+                                   Enabled=false>
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+            </R_ItemLayout>
+
+            <R_ItemLayout col="2">
+                <R_StackLayout Row>
+                    <R_ItemLayout col="4">
+                        <R_Label>
+                            @_localizer["_TotalDebit"]
+                        </R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="8">
+                        <R_NumericTextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.NTOTAL_DEBIT"
+                                          R_ConductorSource="@_conductorImportJournalRef"
+                                          Arrows=false
+                                          Enabled=false>
+                        </R_NumericTextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+                <R_StackLayout Row>
+                    <R_ItemLayout col="4">
+                        <R_Label>
+                            @_localizer["_TotalCredit"]
+                        </R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="8">
+                        <R_NumericTextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.NTOTAL_CREDIT"
+                                          R_ConductorSource="@_conductorImportJournalRef"
+                                          Arrows=false
+                                          Enabled=false>
+                        </R_NumericTextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+            </R_ItemLayout>
+        </R_StackLayout>
+        
+        <R_StackLayout Row>
+            <R_ItemLayout col="1">
+                <R_Label>@_localizer["_Description"]</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout col="9" Style="padding-left:22px; padding-right:24px;">
+                <R_TextBox @bind-Value="@loImportJournalViewModel.loHeaderDisplay.CTRANS_DESC"
+                           R_ConductorSource="@_conductorImportJournalRef"
+                           Enabled=false>
+                </R_TextBox>
+            </R_ItemLayout>
+        </R_StackLayout>
+    </R_GroupBox>
+
+
+
+    <R_GroupBox Title="@_localizer["_JournalDetail"]" ShowBorder>
+        <R_StackLayout Row>
+            <R_ItemLayout col="12">
+                <R_Grid @ref="@_gridImportJournalRef"
+                        DataSource="@loImportJournalViewModel.loDetailDisplayList"
+                        R_ConductorSource="@_conductorImportJournalRef"
+                        R_GridType="@R_eGridType.Original"
+                        AllowAddNewRow="false"
+                        AllowEditRow="false"
+                        AllowDeleteRow="false"
+                        Height="150px"
+                        R_ServiceGetListRecord="@Grid_R_ServiceGetImportJournalListRecord">
+                    <R_GridColumns>
+                        <R_GridTextColumn FieldName="@nameof(GLT00200DetailDTO.CGLACCOUNT_NO)" HeaderText="@_localizer["_AccountNo"]" Width="150px"></R_GridTextColumn>
+                        <R_GridTextColumn FieldName="@nameof(GLT00200DetailDTO.CGLACCOUNT_NAME)" HeaderText="@_localizer["_AccountName"]" Width="300px"></R_GridTextColumn>
+                        <R_GridTextColumn FieldName="@nameof(GLT00200DetailDTO.CCENTER_CODE)" HeaderText="@_localizer["_Center"]" Width="300px"></R_GridTextColumn>
+                        <R_GridTextColumn FieldName="@nameof(GLT00200DetailDTO.CDBCR)" HeaderText="@_localizer["_DC"]" Visible="@IsSingleDCAmount" Width="150px"></R_GridTextColumn>
+                        <R_GridNumericColumn FieldName="@nameof(GLT00200DetailDTO.NDEBIT)" HeaderText="@_localizer["_Debit"]" Visible="@loImportJournalViewModel.IsSeparateDCAmount" Width="150px"></R_GridNumericColumn>
+                        <R_GridNumericColumn FieldName="@nameof(GLT00200DetailDTO.NCREDIT)" HeaderText="@_localizer["_Credit"]" Visible="@loImportJournalViewModel.IsSeparateDCAmount" Width="150px"></R_GridNumericColumn>
+                        <R_GridNumericColumn FieldName="@nameof(GLT00200DetailDTO.NTRANS_AMOUNT)" HeaderText="@_localizer["_Amount"]" Visible="@IsSingleDCAmount" Width="200px"></R_GridNumericColumn>
+                        <R_GridTextColumn FieldName="@nameof(GLT00200DetailDTO.CDETAIL_DESC)" HeaderText="@_localizer["_Description"]" Width="300px"></R_GridTextColumn>
+                        <R_GridTextColumn FieldName="@nameof(GLT00200DetailDTO.CDOCUMENT_NO)" HeaderText="@_localizer["_VoucherNo"]" Width="200px"></R_GridTextColumn>
+                        <R_GridDatePickerColumn FieldName="@nameof(GLT00200DetailDTO.CDOCUMENT_DATE)" HeaderText="@_localizer["_VoucherDate"]" Width="200px"></R_GridDatePickerColumn>
+                        <R_GridNumericColumn FieldName="@nameof(GLT00200DetailDTO.NLDEBIT)" HeaderText="@_localizer["_DBL"]" Width="200px"></R_GridNumericColumn>
+                        <R_GridNumericColumn FieldName="@nameof(GLT00200DetailDTO.NLCREDIT)" HeaderText="@_localizer["_CRL"]" Width="200px"></R_GridNumericColumn>
+                        <R_GridNumericColumn FieldName="@nameof(GLT00200DetailDTO.NBDEBIT)" HeaderText="@_localizer["_DBB"]" Width="200px"></R_GridNumericColumn> 
+                        <R_GridNumericColumn FieldName="@nameof(GLT00200DetailDTO.NBCREDIT)" HeaderText="@_localizer["_CRB"]" Width="200px"></R_GridNumericColumn>
+                        <R_GridTextColumn Visible="@IsSaveProcess" FieldName="@nameof(GLT00200DetailDTO.CVALID)" HeaderText="@_localizer["_Valid"]" Width="100px"></R_GridTextColumn>
+                        <R_GridTextColumn Visible="@IsSaveProcess" FieldName="@nameof(GLT00200DetailDTO.CNOTES)" HeaderText="@_localizer["_Notes"]" Width="300px"></R_GridTextColumn>
+                    </R_GridColumns>
+                </R_Grid>
+            </R_ItemLayout>
+        </R_StackLayout>
+    </R_GroupBox>
+
+    <R_StackLayout Row>
+        <R_ItemLayout col="12">
+            <R_ProgressBar Label="@loImportJournalViewModel.Message" MaxValue="100" Value="@loImportJournalViewModel.Percentage"></R_ProgressBar>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+
+    <R_StackLayout Row Justify="R_eJustify.Center">
+        <R_ItemLayout>
+            <R_Button R_ConductorSource="@_conductorImportJournalRef" Enabled="@IsFileExist" OnClick="SaveImportJournal">@_localizer["_Process"]</R_Button>
+            <R_Button R_ConductorSource="@_conductorImportJournalRef" OnClick="ResetFormProcess">@_localizer["_Reset"]</R_Button>
+        </R_ItemLayout>
+    </R_StackLayout>
+</R_StackLayout>
+
+<R_Conductor @ref="@_conductorImportJournalRef"
+             R_ViewModel="@loImportJournalViewModel"
+             R_IsHeader="true">
+</R_Conductor>

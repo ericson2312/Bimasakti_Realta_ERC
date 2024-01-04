@@ -1,0 +1,1237 @@
+﻿@inherits R_Page
+@using LMM04000COMMON.DTOs.LMM04000
+@using LMM04000COMMON.DTOs.LMM04010
+@using LMM04000COMMON.DTOs.LMM04020
+@using LMM04000COMMON.DTOs
+@using LMM04000COMMON
+@using LMM04000MODEL
+@*
+<R_TabStrip @ref="@tabStripRef" OnActiveTabIndexChanging="OnActiveTabIndexChanging" OnActiveTabIndexChanged="OnActiveTabIndexChanged">
+    <R_TabStripTab Title="Profile" Id="Profile">
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="6">
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="2">
+                        <R_Label>Tenant*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_ID"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   @ref="@_contractorIdRef"
+                                   MaxLength="20"
+                                   TabIndex="1"
+                                   R_EnableAdd="true" R_EnableEdit="false"></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="7" Style="padding-right: 30px">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_NAME"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   @ref="@_contractorNameRef"
+                                   MaxLength="100"
+                                   TabIndex="2"
+                                   R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row="true">
+                    <R_ItemLayout col="2">
+                        <R_Label>Address*</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="10" Style="padding-right: 26px">
+                        <R_TextArea @bind-Value="@loContractorProfileViewModel.Data.Profile.CADDRESS"
+                                    R_ConductorSource="@_conductorProfileTaxRef"
+                                    TabIndex="3"
+                                    MaxLength="255"
+                                    R_EnableAdd="true" R_EnableEdit="true">
+                        </R_TextArea>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row="true">
+                    <R_ItemLayout col="2">
+                        <R_Label>City</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CCITY_NAME"
+                                    R_ConductorSource="@_conductorProfileTaxRef"
+                                   TabIndex="4"
+                                    R_EnableAdd="true" R_EnableEdit="true">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef"
+                                  R_Before_Open_Lookup="BeforeOpenCityLookUp"
+                                  R_After_Open_Lookup="AfterOpenCityLookUp"
+                                   TabIndex="5"
+                                  R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_Label>Zip Code</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="4" Class="pe-5">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPOSTAL_CODE"
+                                    R_ConductorSource="@_conductorProfileTaxRef"
+                                   MaxLength="20"
+                                   TabIndex="6"
+                                    R_EnableAdd="true" R_EnableEdit="true">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+                
+                <R_StackLayout Row="true">
+                    <R_ItemLayout col="2">
+                        <R_Label>Province</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="4" Style="padding-right: 13px; margin-right:3px">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CSTATE_NAME"
+                                    R_ConductorSource="@_conductorProfileTaxRef"
+                                    Enabled="false">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_Label>Country</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="4" Class="pe-5">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CCOUNTRY_NAME"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                    Enabled="false">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="12" Class="pe-4">
+
+                        <R_GroupBox Title="Attention 1">
+
+                            <R_StackLayout Row>
+                                <R_ItemLayout col="6">
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="3">
+                                            <R_Label>Name</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="9">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION1_NAME"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="15"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="3">
+                                            <R_Label>Email</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="9">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION1_EMAIL"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="16"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                </R_ItemLayout>
+                                <R_ItemLayout col="6">
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="4">
+                                            <R_Label>Mobile No</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="8">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION1_MOBILE_PHONE1"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       TabIndex="17"
+                                                       MaxLength="30"
+                                                       R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="4">
+                                            <R_Label>Position</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="8">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION1_POSITION"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="18"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                </R_ItemLayout>
+                            </R_StackLayout>
+                        </R_GroupBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Journal Group*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CJRNGRP_CODE" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="23" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenJournalGroupLookUp" R_After_Open_Lookup="AfterOpenJournalGroupLookUp" TabIndex="24" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6" Class="pe-3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CJRNGRP_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Payment Term*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPAYMENT_TERM_CODE" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="25" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenPaymentTermLookUp" R_After_Open_Lookup="AfterOpenPaymentTermLookUp" TabIndex="26" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6" Class="pe-3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPAYMENT_TERM_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+            </R_ItemLayout>
+            <R_ItemLayout col="6">
+                <R_StackLayout Row Class="pe-4">
+                    <R_ItemLayout col="2">
+                        <R_Label>Phone No (1)</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="4">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPHONE1"
+                                    R_ConductorSource="@_conductorProfileTaxRef"
+                                   TabIndex="7"
+                                    R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_Label>Phone No (2)</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="4">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPHONE2"
+                                    R_ConductorSource="@_conductorProfileTaxRef"
+                                   TabIndex="8"
+                                    R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row="true">
+                    <R_ItemLayout col="2">
+                        <R_Label>Email</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="10" Class="pe-3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CEMAIL"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   TabIndex="9"
+                                   MaxLength="100"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Contractor Group*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_GROUP_ID" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="10" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenContractorGroupLookUp" R_After_Open_Lookup="AfterOpenContractorGroupLookUp" TabIndex="11" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_GROUP_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Contractor Category*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_CATEGORY_ID" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="12" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenContractorCategoryLookUp" R_After_Open_Lookup="AfterOpenContractorCategoryLookUp" TabIndex="13" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_CATEGORY_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="12" Class="pe-3">
+
+                        <R_GroupBox Title="Attention 2">
+
+                            <R_StackLayout Row>
+                                <R_ItemLayout col="6">
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="3">
+                                            <R_Label>Name</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="9">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION2_NAME"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="19"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="3">
+                                            <R_Label>Email</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="9">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION2_EMAIL"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="20"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                </R_ItemLayout>
+                                <R_ItemLayout col="6">
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="4">
+                                            <R_Label>Mobile No</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="8">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION2_MOBILE_PHONE1"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       TabIndex="21"
+                                                       MaxLength="30"
+                                                       R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="4">
+                                            <R_Label>Position</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="8">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION2_POSITION"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       TabIndex="22"
+                                                       MaxLength="100"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                </R_ItemLayout>
+                            </R_StackLayout>
+                        </R_GroupBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+                
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Currency*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CCURRENCY_CODE" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="27" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenCurrencyLookUp" R_After_Open_Lookup="AfterOpenCurrencyLookUp" TabIndex="28" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CCURRENCY_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Line of Business*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CLOB_CODE" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="31" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenLineOfBusinessLookUp" R_After_Open_Lookup="AfterOpenLineOfBusinessLookUp" TabIndex="32" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CLOB_DESCRIPTION" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        <R_StackLayout Row Class="justify-content-between">
+            <R_ItemLayout>
+                <R_AddButton R_Conductor="@_conductorProfileTaxRef"></R_AddButton>
+                <R_EditButton R_Conductor="@_conductorProfileTaxRef"></R_EditButton>
+                <R_DeleteButton R_Conductor="@_conductorProfileTaxRef"></R_DeleteButton>
+            </R_ItemLayout>
+            <R_ItemLayout>
+                <R_Button R_ConductorSource="@_conductorProfileTaxRef" R_EnableOther OnClick="OnClickTemplate">Template</R_Button>
+                <R_Popup R_ConductorSource="@_conductorProfileTaxRef" R_EnableOther R_Before_Open_Popup="Before_Open_Upload_Popup" R_After_Open_Popup="After_Open_Upload_Popup">Upload</R_Popup>
+            </R_ItemLayout>
+            <R_ItemLayout>
+                <R_CancelButton R_Conductor="@_conductorProfileTaxRef" TabIndex="34"></R_CancelButton>
+                <R_Button OnClick="@OnClickNextButton" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="35" R_EnableAdd R_EnableEdit>Next</R_Button>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+    </R_TabStripTab>
+    <R_TabStripTab Title="Tax info" Id="TaxInfo">
+        <R_StackLayout>
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>Tenant</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTENANT_ID"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="20"
+                               Enabled="false"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="6">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTENANT_NAME"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="100"
+                               Enabled="false"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>Tax Type</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_ComboBox @bind-Value="loContractorProfileViewModel.Data.TaxInfo.CTAX_TYPE"
+                                Data="loTaxInfoViewModel.loTaxTypeList"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd
+                                R_EnableEdit
+                                ValueField="@nameof(GetLMM04020ListDTO.CCODE)"
+                                TextField="@nameof(GetLMM04020ListDTO.CDESCRIPTION)"></R_ComboBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                    </R_ItemLayout>
+                    <R_ItemLayout col="5">
+                    <R_CheckBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.LPPH"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd="true" R_EnableEdit="true"></R_CheckBox>
+                    <R_Label>
+                        Receipt Payment with Withholding Tax(PPh) Deduction
+                    </R_Label>
+                    </R_ItemLayout>
+                    </R_StackLayout>
+
+                    <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>Tax Id</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_ID"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               @ref="@_taxIdRef"
+                               MaxLength="40"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>Tax Name</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="9">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_NAME"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="100"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>ID Number</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CID_NO"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="40"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                    <R_Label>ID Type</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_ComboBox @bind-Value="loContractorProfileViewModel.Data.TaxInfo.CID_TYPE"
+                                Data="loTaxInfoViewModel.loIdTypeList"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd
+                                R_EnableEdit
+                                ValueField="@nameof(GetLMM04020ListDTO.CCODE)"
+                                TextField="@nameof(GetLMM04020ListDTO.CDESCRIPTION)"></R_ComboBox>
+                    </R_ItemLayout>
+                    </R_StackLayout>
+
+                    <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>ID Expired Date</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3">
+                    <R_DateTimePicker @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.DID_EXPIRED_DATE"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_DateTimePicker>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>Tax Code</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_ComboBox @bind-Value="loContractorProfileViewModel.Data.TaxInfo.CTAX_CODE"
+                                Data="loTaxInfoViewModel.loTaxCodeList"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd
+                                R_EnableEdit
+                                ValueField="@nameof(GetLMM04020ListDTO.CCODE)"
+                                TextField="@nameof(GetLMM04020ListDTO.CDESCRIPTION)"></R_ComboBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                    <R_Label>Limit Amount</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_NumericTextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.NTAX_CODE_LIMIT_AMOUNT"
+                                      R_ConductorSource="@_conductorProfileTaxRef"
+                                      R_EnableAdd="true" R_EnableEdit="true"></R_NumericTextBox>
+                    </R_ItemLayout>
+                    </R_StackLayout>
+
+                    <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>Address</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="9">
+                    <R_TextArea @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_ADDRESS"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd="true" R_EnableEdit="true"></R_TextArea>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>Phone No(1)</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_PHONE1"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                                   MaxLength="30"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="2">
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                    <R_Label>Phone No(2)</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_PHONE2"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                                   MaxLength="30"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>Email</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="9">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_EMAIL"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="100"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row="true">
+                <R_ItemLayout col="2">
+                    <R_Label>Updated By</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CUPDATE_BY"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               Enabled="false"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                    <R_Label>Date</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_DateTimePicker @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.DUPDATE_DATE"
+                                      R_ConductorSource="@_conductorProfileTaxRef"
+                                      Enabled="false"></R_DateTimePicker>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row="true">
+                <R_ItemLayout col="2">
+                    <R_Label>Created By</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CCREATE_BY"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               Enabled="false"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                    <R_Label>Date</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_DateTimePicker @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.DCREATE_DATE"
+                                      R_ConductorSource="@_conductorProfileTaxRef"
+                                      Enabled="false"></R_DateTimePicker>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row Class="justify-content-end">
+                <R_ItemLayout>
+                    <R_CancelButton R_Conductor="@_conductorProfileTaxRef"></R_CancelButton>
+                    <R_SaveButton R_Conductor="@_conductorProfileTaxRef"></R_SaveButton>
+                </R_ItemLayout>
+            </R_StackLayout>
+        </R_StackLayout>
+    </R_TabStripTab>
+</R_TabStrip>
+*@
+
+<R_TabStrip @ref="@tabStripRef" OnActiveTabIndexChanging="OnActiveTabIndexChanging" OnActiveTabIndexChanged="OnActiveTabIndexChanged">
+    <R_TabStripTab Title="@_localizer["_Profile"]" Id="Profile">
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="6">
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_Contractor"]*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_ID"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   @ref="@_contractorIdRef"
+                                   MaxLength="20"
+                                   TabIndex="1"
+                                   R_EnableAdd="true" R_EnableEdit="false"></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="7" Style="padding-right: 30px">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_NAME"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   @ref="@_contractorNameRef"
+                                   MaxLength="100"
+                                   TabIndex="2"
+                                   R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row="true">
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_Address"]*</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="10" Style="padding-right: 26px">
+                        <R_TextArea @bind-Value="@loContractorProfileViewModel.Data.Profile.CADDRESS"
+                                    R_ConductorSource="@_conductorProfileTaxRef"
+                                    TabIndex="3"
+                                    MaxLength="255"
+                                    R_EnableAdd="true" R_EnableEdit="true">
+                        </R_TextArea>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row="true">
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_City"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CCITY_NAME"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   TabIndex="4"
+                                   R_EnableAdd="true" R_EnableEdit="true">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef"
+                                  R_Before_Open_Lookup="BeforeOpenCityLookUp"
+                                  R_After_Open_Lookup="AfterOpenCityLookUp"
+                                  TabIndex="5"
+                                  R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_ZipCode"]</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="4" Class="pe-5">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPOSTAL_CODE"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   MaxLength="20"
+                                   TabIndex="6"
+                                   R_EnableAdd="true" R_EnableEdit="true">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row="true">
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_Province"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="4" Style="padding-right: 13px; margin-right:3px">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CSTATE_NAME"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   Enabled="false">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_Country"]</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="4" Class="pe-5">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CCOUNTRY_NAME"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   Enabled="false">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="12" Class="pe-4">
+
+                        <R_GroupBox Title="@_localizer["_Attention1"]">
+
+                            <R_StackLayout Row>
+                                <R_ItemLayout col="6">
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="3">
+                                            <R_Label>@_localizer["_Name"]</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="9">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION1_NAME"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="15"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="3">
+                                            <R_Label>@_localizer["_Email"]</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="9">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION1_EMAIL"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="16"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                </R_ItemLayout>
+                                <R_ItemLayout col="6">
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="4">
+                                            <R_Label>@_localizer["_MobileNo"]</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="8">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION1_MOBILE_PHONE1"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       TabIndex="17"
+                                                       MaxLength="30"
+                                                       R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="4">
+                                            <R_Label>@_localizer["_Position"]</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="8">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION1_POSITION"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="18"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                </R_ItemLayout>
+                            </R_StackLayout>
+                        </R_GroupBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_JournalGroup"]*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CJRNGRP_CODE" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="23" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenJournalGroupLookUp" R_After_Open_Lookup="AfterOpenJournalGroupLookUp" TabIndex="24" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6" Class="pe-3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CJRNGRP_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_PaymentTerm"]*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPAYMENT_TERM_CODE" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="25" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenPaymentTermLookUp" R_After_Open_Lookup="AfterOpenPaymentTermLookUp" TabIndex="26" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6" Class="pe-3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPAYMENT_TERM_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+            </R_ItemLayout>
+            <R_ItemLayout col="6">
+                <R_StackLayout Row Class="pe-4">
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_PhoneNo(1)"]</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="4">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPHONE1"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   TabIndex="7"
+                                   R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_PhoneNo(2)"]</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="4">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CPHONE2"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   TabIndex="8"
+                                   R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row="true">
+                    <R_ItemLayout col="2">
+                        <R_Label>@_localizer["_Email"]</R_Label>
+                    </R_ItemLayout>
+
+                    <R_ItemLayout col="10" Class="pe-3">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CEMAIL"
+                                   R_ConductorSource="@_conductorProfileTaxRef"
+                                   TabIndex="9"
+                                   MaxLength="100"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true">
+                        </R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_ContractorGroup"]</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_GROUP_ID" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="10" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenContractorGroupLookUp" R_After_Open_Lookup="AfterOpenContractorGroupLookUp" TabIndex="11" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_GROUP_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_ContractorCategory"]*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_CATEGORY_ID" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="12" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenContractorCategoryLookUp" R_After_Open_Lookup="AfterOpenContractorCategoryLookUp" TabIndex="13" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CTENANT_CATEGORY_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                        <R_StackLayout Row>
+                    <R_ItemLayout col="12" Class="pe-3">
+
+                        <R_GroupBox Title="@_localizer["_Attention2"]">
+
+                            <R_StackLayout Row>
+                                <R_ItemLayout col="6">
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="3">
+                                            <R_Label>@_localizer["_Name"]</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="9">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION2_NAME"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="19"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="3">
+                                            <R_Label>@_localizer["_Email"]</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="9">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION2_EMAIL"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       MaxLength="100"
+                                                       TabIndex="20"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                </R_ItemLayout>
+                                <R_ItemLayout col="6">
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="4">
+                                            <R_Label>@_localizer["_MobileNo"]</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="8">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION2_MOBILE_PHONE1"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       TabIndex="21"
+                                                       MaxLength="30"
+                                                       R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                    <R_StackLayout Row>
+                                        <R_ItemLayout col="4">
+                                            <R_Label>@_localizer["_Position"]</R_Label>
+                                        </R_ItemLayout>
+                                        <R_ItemLayout col="8">
+                                            <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CATTENTION2_POSITION"
+                                                       R_ConductorSource="@_conductorProfileTaxRef"
+                                                       TabIndex="22"
+                                                       MaxLength="100"
+                                                       R_EnableAdd="true"
+                                                       R_EnableEdit="true"></R_TextBox>
+                                        </R_ItemLayout>
+                                    </R_StackLayout>
+                                </R_ItemLayout>
+                            </R_StackLayout>
+                        </R_GroupBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+                
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_Currency"]*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CCURRENCY_CODE" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="27" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenCurrencyLookUp" R_After_Open_Lookup="AfterOpenCurrencyLookUp" TabIndex="28" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CCURRENCY_NAME" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>@_localizer["_LineofBusiness"]*</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="2">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CLOB_CODE" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="31" R_EnableAdd R_EnableEdit></R_TextBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout Style="width:25px">
+                        <R_Lookup R_ConductorSource="@_conductorProfileTaxRef" R_Before_Open_Lookup="BeforeOpenLineOfBusinessLookUp" R_After_Open_Lookup="AfterOpenLineOfBusinessLookUp" TabIndex="32" R_EnableAdd R_EnableEdit>...</R_Lookup>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="6">
+                        <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.Profile.CLOB_DESCRIPTION" R_ConductorSource="@_conductorProfileTaxRef" Enabled="false"></R_TextBox>
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        <R_StackLayout Row Class="justify-content-between">
+            <R_ItemLayout>
+                <R_AddButton R_Conductor="@_conductorProfileTaxRef"></R_AddButton>
+                <R_EditButton R_Conductor="@_conductorProfileTaxRef"></R_EditButton>
+                <R_DeleteButton R_Conductor="@_conductorProfileTaxRef"></R_DeleteButton>
+            </R_ItemLayout>
+            <R_ItemLayout>
+                <R_Button R_ConductorSource="@_conductorProfileTaxRef" R_EnableOther OnClick="OnClickTemplate">@_localizer["_Template"]</R_Button>
+                <R_Popup R_ConductorSource="@_conductorProfileTaxRef" R_EnableOther R_Before_Open_Popup="Before_Open_Upload_Popup" R_After_Open_Popup="After_Open_Upload_Popup">@_localizer["_Upload"]</R_Popup>
+                </R_ItemLayout>
+                <R_ItemLayout>
+                <R_CancelButton R_Conductor="@_conductorProfileTaxRef" TabIndex="34"></R_CancelButton>
+                <R_Button OnClick="@OnClickNextButton" R_ConductorSource="@_conductorProfileTaxRef" TabIndex="35" R_EnableAdd R_EnableEdit>@_localizer["_Next"]</R_Button>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+    </R_TabStripTab>
+    <R_TabStripTab Title="@_localizer["_Taxinfo"]" Id="TaxInfo">
+        <R_StackLayout>
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_Contractor"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTENANT_ID"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="20"
+                               Enabled="false"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="6">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTENANT_NAME"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="100"
+                               Enabled="false"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_TaxType"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_ComboBox @bind-Value="loContractorProfileViewModel.Data.TaxInfo.CTAX_TYPE"
+                                Data="loTaxInfoViewModel.loTaxTypeList"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd
+                                R_EnableEdit
+                                ValueField="@nameof(GetLMM04020ListDTO.CCODE)"
+                                TextField="@nameof(GetLMM04020ListDTO.CDESCRIPTION)"></R_ComboBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                    </R_ItemLayout>
+                    <R_ItemLayout col="5">
+                    <R_CheckBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.LPPH"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd="true" R_EnableEdit="true"></R_CheckBox>
+                    <R_Label>
+                        @_localizer["_PPh"]
+                    </R_Label>
+                    </R_ItemLayout>
+                    </R_StackLayout>
+
+                    <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_TaxId"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_ID"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               @ref="@_taxIdRef"
+                               MaxLength="40"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_TaxName"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="9">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_NAME"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="100"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_IDNumber"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CID_NO"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="40"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_IDType"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_ComboBox @bind-Value="loContractorProfileViewModel.Data.TaxInfo.CID_TYPE"
+                                Data="loTaxInfoViewModel.loIdTypeList"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd
+                                R_EnableEdit
+                                ValueField="@nameof(GetLMM04020ListDTO.CCODE)"
+                                TextField="@nameof(GetLMM04020ListDTO.CDESCRIPTION)"></R_ComboBox>
+                    </R_ItemLayout>
+                    </R_StackLayout>
+
+                    <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_IDExpiredDate"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3">
+                    <R_DateTimePicker @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.DID_EXPIRED_DATE"
+                                      R_ConductorSource="@_conductorProfileTaxRef"
+                                      R_EnableAdd="true" R_EnableEdit="true"></R_DateTimePicker>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_TaxCode"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_ComboBox @bind-Value="loContractorProfileViewModel.Data.TaxInfo.CTAX_CODE"
+                                Data="loTaxInfoViewModel.loTaxCodeList"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd
+                                R_EnableEdit
+                                ValueField="@nameof(GetLMM04020ListDTO.CCODE)"
+                                TextField="@nameof(GetLMM04020ListDTO.CDESCRIPTION)"></R_ComboBox>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                    </R_ItemLayout>
+                    <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_LimitAmount"]</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_NumericTextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.NTAX_CODE_LIMIT_AMOUNT"
+                                      R_ConductorSource="@_conductorProfileTaxRef"
+                                      R_EnableAdd="true" R_EnableEdit="true"></R_NumericTextBox>
+                    </R_ItemLayout>
+                    </R_StackLayout>
+
+                    <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_Address"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="9">
+                    <R_TextArea @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_ADDRESS"
+                                R_ConductorSource="@_conductorProfileTaxRef"
+                                R_EnableAdd="true" R_EnableEdit="true"></R_TextArea>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_PhoneNo(1)"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_PHONE1"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="30"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="2">
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_PhoneNo(2)"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_PHONE2"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="30"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row>
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_Email"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="9">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CTAX_EMAIL"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               MaxLength="100"
+                               R_EnableAdd="true" R_EnableEdit="true"></R_TextBox>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row="true">
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_UpdatedBy"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CUPDATE_BY"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               Enabled="false"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_Date"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_DateTimePicker @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.DUPDATE_DATE"
+                                      R_ConductorSource="@_conductorProfileTaxRef"
+                                      Enabled="false"></R_DateTimePicker>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row="true">
+                <R_ItemLayout col="2">
+                    <R_Label>@_localizer["_CreatedBy"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.CCREATE_BY"
+                               R_ConductorSource="@_conductorProfileTaxRef"
+                               Enabled="false"></R_TextBox>
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                </R_ItemLayout>
+                <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_Date"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="3" Style="padding-right: 9px">
+                    <R_DateTimePicker @bind-Value="@loContractorProfileViewModel.Data.TaxInfo.DCREATE_DATE"
+                                      R_ConductorSource="@_conductorProfileTaxRef"
+                                      Enabled="false"></R_DateTimePicker>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            <R_StackLayout Row Class="justify-content-end">
+                <R_ItemLayout>
+                    <R_CancelButton R_Conductor="@_conductorProfileTaxRef"></R_CancelButton>
+                    <R_SaveButton R_Conductor="@_conductorProfileTaxRef"></R_SaveButton>
+                </R_ItemLayout>
+            </R_StackLayout>
+            </R_StackLayout>
+            </R_TabStripTab>
+        </R_TabStrip>
+
+<R_Conductor @ref="@_conductorProfileTaxRef"
+              R_IsHeader
+             R_ViewModel="@loContractorProfileViewModel"
+             R_Saving="ProfileAndTaxInfo_Saving"
+             R_SetOther="Contractor_SetOther"
+             R_BeforeCancel="Contractor_BeforeCancel"
+             R_Display="Contractor_Display"
+             R_AfterAdd="Contractor_AfterAdd"
+             R_ServiceSave="ProfileAndTaxInfo_ServiceSave"
+             R_ServiceGetRecord="@ProfileAndTaxInfo_GetContractorProfile"
+             R_ServiceDelete="ProfileAndTaxInfo_ServiceDelete">
+</R_Conductor>

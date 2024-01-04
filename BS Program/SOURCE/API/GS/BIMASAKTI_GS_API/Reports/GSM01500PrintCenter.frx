@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<inherited BaseReport="BaseHeaderCommon.frx" BaseReportAbsolutePath="D:\Fake\Future1\BIMASAKTI_11\BIMASAKTI_11\1.00\PROGRAM\BS Program\SOURCE\API\GS\BIMASAKTI_GS_API\Reports\BaseHeaderCommon.frx" ScriptLanguage="CSharp" ReportInfo.Created="08/04/2023 16:21:34" ReportInfo.Modified="11/21/2023 13:34:32" ReportInfo.CreatorVersion="2023.2.21.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="ResponseDataModel" ReferenceName="ResponseDataModel" DataType="System.Collections.ArrayList" Enabled="true">
+      <Column Name="CenterData" DataType="GSM01500COMMON.DTOs.GSM01500Print.GSM01500PrintCenterResultDTO, GSM01500COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="Title" DataType="System.String"/>
+        <Column Name="Header" DataType="System.String"/>
+        <Column Name="PrintDept" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Column" DataType="GSM01500COMMON.DTOs.GSM01500Print.GSM01500PrintCenterColumnDTO, GSM01500COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Column Name="CCENTER_CODE" DataType="System.String"/>
+          <Column Name="CCENTER_NAME" DataType="System.String"/>
+          <Column Name="LACTIVE" DataType="System.String"/>
+          <Column Name="CDEPARTMENT" DataType="System.String"/>
+        </Column>
+        <BusinessObjectDataSource Name="Data" DataType="System.Collections.Generic.List`1[[GSM01500COMMON.DTOs.GSM01500Print.GSM01500PrintCenterHeaderDTO, GSM01500COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+          <Column Name="CCENTER_CODE" DataType="System.String"/>
+          <Column Name="CCENTER_NAME" DataType="System.String"/>
+          <Column Name="LACTIVE" DataType="System.Boolean" BindableControl="CheckBox"/>
+          <BusinessObjectDataSource Name="DetailData" DataType="System.Collections.Generic.List`1[[GSM01500COMMON.DTOs.GSM01500Print.GSM01500PrintCenterDetailDTO, GSM01500COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+            <Column Name="CDEPT_CODE" DataType="System.String"/>
+            <Column Name="CDEPT_NAME" DataType="System.String"/>
+          </BusinessObjectDataSource>
+        </BusinessObjectDataSource>
+      </Column>
+      <Column Name="BaseHeaderData" DataType="BaseHeaderReportCOMMON.BaseHeaderDTO, BaseHeaderReportCOMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="BLOGO_COMPANY" DataType="System.Byte[]" BindableControl="Picture"/>
+        <Column Name="CPRINT_CODE" DataType="System.String"/>
+        <Column Name="CCOMPANY_NAME" DataType="System.String"/>
+        <Column Name="CPRINT_NAME" DataType="System.String"/>
+        <Column Name="CUSER_ID" DataType="System.String"/>
+      </Column>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <inherited Name="Page1">
+    <inherited Name="PageHeader1">
+      <inherited Name="Picture1"/>
+      <inherited Name="Text33"/>
+      <inherited Name="Text40">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </inherited>
+      <inherited Name="Text36"/>
+      <inherited Name="Text38"/>
+      <inherited Name="Text41"/>
+      <inherited Name="Text34"/>
+      <inherited Name="Text37"/>
+      <inherited Name="Text39"/>
+      <inherited Name="Text42"/>
+      <ChildBand Name="Child2" ZOrder="-1" Top="89.05" Width="718.2" Height="18.9">
+        <TextObject Name="Text44" Width="302.4" Height="18.9" Text="[ResponseDataModel.CenterData.Header]" Font="MS Gothic, 10pt"/>
+      </ChildBand>
+    </inherited>
+    <ColumnHeaderBand Name="ColumnHeader1" ZOrder="-1" Top="111.95" Width="718.2" Height="18.9" Border.Lines="Bottom" Fill.Color="DarkBlue">
+      <TextObject Name="Text45" Width="226.8" Height="18.9" Text="[ResponseDataModel.CenterData.Column.CCENTER_CODE]" VertAlign="Center" Font="MS Gothic, 10pt" TextFill.Color="White"/>
+      <TextObject Name="Text46" Left="283.5" Width="226.8" Height="18.9" Text="[ResponseDataModel.CenterData.Column.CCENTER_NAME]" VertAlign="Center" Font="MS Gothic, 10pt" TextFill.Color="White"/>
+      <TextObject Name="Text47" Left="567" Width="151.2" Height="18.9" Text="[ResponseDataModel.CenterData.Column.LACTIVE]" VertAlign="Center" Font="MS Gothic, 10pt" TextFill.Color="White"/>
+      <ChildBand Name="Child3" Top="134.85" Width="718.2" Height="18.9" Fill.Color="DarkBlue" CanShrink="true">
+        <TextObject Name="Text48" Left="75.6" Width="340.2" Height="18.9" Text="[ResponseDataModel.CenterData.Column.CDEPARTMENT]" VertAlign="Center" Font="MS Gothic, 10pt" TextFill.Color="White">
+          <Highlight>
+            <Condition Expression="[ResponseDataModel.CenterData.PrintDept] == false" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+          </Highlight>
+        </TextObject>
+      </ChildBand>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" ZOrder="0" Top="157.75" Width="718.2" Height="28.35" CanGrow="true" DataSource="Data">
+      <TextObject Name="Text49" Top="9.45" Width="226.8" Height="18.9" Text="[ResponseDataModel.CenterData.Data.CCENTER_CODE]" Font="Arial, 10pt"/>
+      <TextObject Name="Text50" Left="283.5" Top="9.45" Width="226.8" Height="18.9" CanGrow="true" CanShrink="true" Text="[ResponseDataModel.CenterData.Data.CCENTER_NAME]" Font="MS Gothic, 10pt"/>
+      <CheckBoxObject Name="CheckBox1" Left="633.15" Top="9.45" Width="18.9" Height="18.9" Border.Lines="All" DataColumn="ResponseDataModel.CenterData.Data.LACTIVE"/>
+      <DataBand Name="Data2" Top="190.1" Width="718.2" Height="18.9" CanGrow="true" DataSource="DetailData">
+        <TextObject Name="Text51" Left="75.6" Width="642.6" Height="18.9" CanGrow="true" CanShrink="true" Text="[ResponseDataModel.CenterData.Data.DetailData.CDEPT_CODE] - [ResponseDataModel.CenterData.Data.DetailData.CDEPT_NAME]" Font="MS Gothic, 10pt">
+          <Formats>
+            <GeneralFormat/>
+            <GeneralFormat/>
+          </Formats>
+          <Highlight>
+            <Condition Expression="[ResponseDataModel.CenterData.PrintDept] == false" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+            <Condition Expression="string.IsNullOrWhiteSpace([ResponseDataModel.CenterData.Data.DetailData.CDEPT_CODE]) == true" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+          </Highlight>
+        </TextObject>
+      </DataBand>
+    </DataBand>
+  </inherited>
+</inherited>

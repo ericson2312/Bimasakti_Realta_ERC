@@ -1,0 +1,10 @@
+3001	= Error process, please contact your administrator!
+3002	= Duplicate Tenant Category Id!
+3003	= Cannot Delete, Tenant Category already in used!
+3004	= Cannot Delete, Tenant Category have a child!
+3005	= Tenant Category Id cannot be empty!
+3006	= Tenant Category Name cannot be empty!
+3007	= Tenant Category Id cannot be greater than 20 character!
+3008	= Tenant Category Name cannot be greater than 100 character!
+
+

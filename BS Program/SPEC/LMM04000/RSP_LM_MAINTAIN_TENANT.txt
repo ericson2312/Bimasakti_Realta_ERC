@@ -1,0 +1,26 @@
+3501 = Error process, please contact your administrator!
+3502 = Duplicate Contractor Id!
+3503 = Cannot Delete, Contractor already in used
+3504 = Contractor Id cannot be empty!
+3505 = Contractor Name cannot be empty!
+3506 = Contractor Id cannot be greater than 20 character!
+3507 = Contractor Name cannot be greater than 100 character!
+3508 = Address cannot be empty!
+3509 = Contractor Group cannot be empty!
+3510 = Invalid Contractor Group!
+3511 = Contractor Category cannot be empty!
+3523 = Invalid Contractor Category!
+3524 = Contractor Type cannot be empty!
+3512 = Invalid Contractor Type!
+3513 = Journal Group cannot be empty!
+3514 = Invalid Journal Group!
+3515 = Payment Term cannot be empty!
+3516 = Invalid Payment Term!
+3517 = Currency cannot be empty!
+3518 = Invalid Currency!
+3519 = Salesman cannot be empty!
+3520 = Invalid Salesman!
+3521 = Line of Business cannot be empty!
+3522 = Invalid Line of Business!
+
+

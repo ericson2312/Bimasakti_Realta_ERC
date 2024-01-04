@@ -1,0 +1,184 @@
+﻿@page "/GSM02200" 
+@inherits R_Page
+@using GSM02200COMMON
+@using GSM02200MODEL
+
+<R_StackLayout Row>
+    <R_ItemLayout col="4">
+        <R_StackLayout Row>
+            <R_CheckBox Value="@_viewModel.ShowInactiveGeography" ValueChanged="@((bool value) => ShowInactiveCheckbox_OnChange(value))" />
+            <R_Label>Show Inactive Geography</R_Label>
+        </R_StackLayout>
+        <R_StackLayout Row>
+            <R_Grid @ref="@_gridRef"
+                    DataSource="@_viewModel.GeographyList"
+                    R_ConductorSource="@_conductorRef"
+                    R_GridType="@R_eGridType.Navigator"
+                    Pageable="true"
+                    R_ServiceGetListRecord="@Geography_ServiceGetListRecord" Height="420px">
+                <R_GridColumns>
+                    <R_GridTextColumn FieldName="CCODE" HeaderText="Code"></R_GridTextColumn>
+                    <R_GridTextColumn FieldName="CNAME" HeaderText="Description"></R_GridTextColumn>
+                </R_GridColumns>
+            </R_Grid>
+        </R_StackLayout>
+    </R_ItemLayout>
+    <R_ItemLayout col="8">
+        <R_StackLayout Row>
+            <R_ItemLayout col="3">
+                <R_Label>Parent Code</R_Label>
+            </R_ItemLayout>
+
+            <R_ItemLayout col="5">
+                <R_TextBox @bind-Value="@_viewModel.Data.CPARENT_CODE"
+                           R_ConductorSource="@_conductorRef"
+                           Enabled="false"></R_TextBox>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="3">
+                <R_Label>Parent Description</R_Label>
+            </R_ItemLayout>
+
+            <R_ItemLayout col="8">
+                <R_TextBox @bind-Value="@_viewModel.Data.CPARENT_NAME"
+                           R_ConductorSource="@_conductorRef"
+                           Enabled="false"></R_TextBox>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="3">
+                <R_Label>Geography Code</R_Label>
+            </R_ItemLayout>
+
+            <R_ItemLayout col="5">
+                <R_TextBox @bind-Value="@_viewModel.Data.CCODE"
+                           R_ConductorSource="@_conductorRef"
+                           R_EnableAdd R_EnableEdit="false"></R_TextBox>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="3">
+                <R_Label>Geography Description</R_Label>
+            </R_ItemLayout>
+
+            <R_ItemLayout col="8">
+                <R_TextBox @bind-Value="@_viewModel.Data.CNAME"
+                           R_ConductorSource="@_conductorRef"
+                           R_EnableAdd R_EnableEdit></R_TextBox>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="3">
+                <R_Label>Status</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout col="5">
+                <R_CheckBox @bind-Value="@_viewModel.Data.LACTIVE" R_ConductorSource="@_conductorRef" Enabled="false" />
+                <R_Label>Active</R_Label>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="3">
+                <R_Label>Ref Code</R_Label>
+            </R_ItemLayout>
+
+            <R_ItemLayout col="5">
+                <R_TextBox @bind-Value="@_viewModel.Data.CREF_CODE"
+                           R_ConductorSource="@_conductorRef"
+                           R_EnableAdd R_EnableEdit></R_TextBox>
+            </R_ItemLayout>
+        </R_StackLayout>
+        
+        @*Spasing*@
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        @*Spasing*@
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="6">
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Create By</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="5">
+                        <R_TextBox @bind-Value="@_viewModel.Data.CCREATOR_NAME" R_ConductorSource="@_conductorRef" Enabled="false" />
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Create Date</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="5">
+                        <R_DateInput @bind-Value="@_viewModel.Data.DCREATE_DATE" R_ConductorSource="@_conductorRef" Enabled="false" />
+                    </R_ItemLayout>
+                </R_StackLayout>
+            </R_ItemLayout>
+
+            <R_ItemLayout col="6">
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Update By</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="5">
+                        <R_TextBox @bind-Value="@_viewModel.Data.CUPDATE_BY" R_ConductorSource="@_conductorRef" Enabled="false" />
+                    </R_ItemLayout>
+                </R_StackLayout>
+
+                <R_StackLayout Row>
+                    <R_ItemLayout col="3">
+                        <R_Label>Update Date</R_Label>
+                    </R_ItemLayout>
+                    <R_ItemLayout col="5">
+                        <R_DateInput @bind-Value="@_viewModel.Data.DUPDATE_DATE" R_ConductorSource="@_conductorRef" Enabled="false" />
+                    </R_ItemLayout>
+                </R_StackLayout>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        @*Spasing*@
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        <R_StackLayout Row><R_ItemLayout col="3"><R_Label></R_Label></R_ItemLayout></R_StackLayout>
+        @*Spasing*@
+
+        <R_StackLayout Row>
+            <R_ItemLayout col="4">
+                <R_AddButton R_Conductor="@_conductorRef"></R_AddButton>
+                <R_EditButton R_Conductor="@_conductorRef"></R_EditButton>
+                <R_Button R_ConductorSource="@_conductorRef" OnClick="@Geography_ActiveInactive_OnClick" R_EnableHasData>@_lcLabelActivate</R_Button>
+            </R_ItemLayout>
+            <R_ItemLayout col="4">
+                <R_Button R_ConductorSource="@_conductorRef" OnClick="@Geography_TemplateBtn_OnClick">Template</R_Button>
+                <R_Popup R_ConductorSource="@_conductorRef" R_Before_Open_Popup="@Geography_Upload_Before_Open_Popup" R_After_Open_Popup="@Geography_Upload_After_Open_Popup">Upload</R_Popup>
+            </R_ItemLayout>
+            <R_ItemLayout col="3">
+                <R_CancelButton R_Conductor="@_conductorRef"></R_CancelButton>
+                <R_SaveButton R_Conductor="@_conductorRef"></R_SaveButton>
+            </R_ItemLayout>
+        </R_StackLayout>
+    </R_ItemLayout>
+</R_StackLayout>
+
+
+<R_Conductor @ref="@_conductorRef"
+             R_ViewModel="@_viewModel"
+             R_IsHeader="true"
+             R_ServiceGetRecord="@Geography_ServiceGetRecord"
+             R_Display="@Geography_Display"
+             R_CheckEdit="@Geography_CheckEdit"
+             R_AfterAdd="@Geography_AfterAdd"
+             R_Validation="@Geography_Validation"
+             R_ServiceSave="@Geography_ServiceSave"
+             >
+</R_Conductor>

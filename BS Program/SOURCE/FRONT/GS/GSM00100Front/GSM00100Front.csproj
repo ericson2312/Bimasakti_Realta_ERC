@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Compile Remove="ViewModels\**" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="Models\**" />
+    <Content Remove="ViewModels\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="Models\**" />
+    <None Remove="ViewModels\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="GSM00100Client.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="TestPopup.razor" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.12" />
+    <PackageReference Include="Telerik.UI.for.Blazor" Version="3.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Menu\BlazorClientHelper\BlazorClientHelper.csproj" />
+    <ProjectReference Include="..\GSM00100FrontResources\GSM00100FrontResources.csproj" />
+    <ProjectReference Include="..\GSM00100Model\GSM00100Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="R_BlazorFrontEnd">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\Front\R_BlazorFrontEnd.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

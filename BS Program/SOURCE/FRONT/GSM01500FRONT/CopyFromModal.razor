@@ -1,0 +1,32 @@
+﻿@inherits R_Page
+@attribute [R_BlazorFrontEnd.Controls.Attributes.R_Page(Title = "Company List")]
+@using GSM01500COMMON.DTOs
+
+<R_StackLayout Style="width:1000px">
+    <R_Grid @ref="@_gridRef"
+            DataSource="@CenterViewModel.loCompanyList"
+            Pageable="true"
+            R_ConductorGridSource="@_conGridCompanyRef"
+            R_GridType="@R_eGridType.Original"
+            AllowAddNewRow="false"
+            AllowEditRow="false"
+            AllowDeleteRow="false"
+            R_ServiceGetListRecord="@Grid_R_ServiceGetListRecord">
+        <R_GridColumns>
+            <R_GridTextColumn FieldName=@nameof(CopyFromProcessCompanyDTO.CCOMPANY_ID) HeaderText="@_localizer["_CompanyId"]" ></R_GridTextColumn>
+            <R_GridTextColumn FieldName=@nameof(CopyFromProcessCompanyDTO.CCOMPANY_NAME) HeaderText="@_localizer["_CompanyName"]"></R_GridTextColumn>
+        </R_GridColumns>
+    </R_Grid>
+
+    <R_StackLayout Row Class="justify-content-end">
+        <R_ItemLayout>
+            <R_Button R_ConductorGridSource="_conGridCompanyRef" OnClick="OnProcess">@_localizer["_Process"]</R_Button>
+            <R_Button R_ConductorGridSource="_conGridCompanyRef" OnClick="OnClose">@_localizer["_Close"]</R_Button>
+        </R_ItemLayout>
+    </R_StackLayout>
+</R_StackLayout>
+
+<R_ConductorGrid @ref="@_conGridCompanyRef"
+                 R_ViewModel="@CenterViewModel"
+                 R_IsHeader="true"
+></R_ConductorGrid>

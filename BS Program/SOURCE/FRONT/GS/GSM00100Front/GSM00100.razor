@@ -1,0 +1,354 @@
+﻿@page "/GSM00100"
+@inherits R_Page
+@attribute [R_Page(Title = "SMTP Master")]
+
+@inject R_ILocalizer<GSM00100FrontResources.Resources_Dummy_Class> _localizer
+
+<R_Grid @ref="@_gridRef"
+        DataSource="@SMTPViewModel.GridData"
+        Pageable="true"
+        R_ConductorSource="@_conductorRef"
+        R_GridType="@R_eGridType.Navigator"
+        R_ServiceGetListRecord="@Grid_R_ServiceGetListRecord">
+    <R_GridColumns>
+        <R_GridTextColumn FieldName="CSMTP_ID" HeaderText=@_localizer["_CSMTP_ID"]></R_GridTextColumn>
+        <R_GridTextColumn FieldName="CSMTP_SERVER" HeaderText="SMTP Server"></R_GridTextColumn>
+        <R_GridTextColumn FieldName="CSMTP_PORT" HeaderText="SMTP Port"></R_GridTextColumn>
+        <R_GridCheckBoxColumn FieldName="LSUPPORT_SSL" HeaderText="Support SSL"></R_GridCheckBoxColumn>
+        <R_GridTextColumn FieldName="CGENERAL_EMAIL_ADDRESS" HeaderText="General Email Address"></R_GridTextColumn>
+    </R_GridColumns>
+</R_Grid>
+
+<R_Card Title=@_localizer["_HeaderGroupBox"]>
+    <R_CardContent>
+        <R_Row>
+            <R_Column ColumnSize="6">
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_CSMTP_ID"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="10">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_ID"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="false"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_CSMTP_SERVER"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="10">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_SERVER"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_CSMTP_PORT"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="10">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_PORT"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_Created"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="4">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CCREATE_BY"
+                                   R_ConductorSource="@_conductorRef"
+                                   Enabled="false"></R_TextBox>
+                    </R_Column>
+                    <R_Column ColumnSize="6">
+                        <R_DateTimePicker @bind-Value="@SMTPViewModel.Data.DCREATE_DATE"
+                                          R_ConductorSource="@_conductorRef"
+                                          Enabled="false"></R_DateTimePicker>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_Updated"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="4">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CUPDATE_BY"
+                                   R_ConductorSource="@_conductorRef"
+                                   Enabled="false"></R_TextBox>
+                    </R_Column>
+                    <R_Column ColumnSize="6">
+                        <R_DateTimePicker @bind-Value="@SMTPViewModel.Data.DUPDATE_DATE"
+                                          R_ConductorSource="@_conductorRef"
+                                          Enabled="false"></R_DateTimePicker>
+                    </R_Column>
+                </R_Row>
+            </R_Column>
+
+            <R_Column ColumnSize="6">
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_CSMTP_CREDENTIAL_USER"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="9">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_CREDENTIAL_USER"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_CSMTP_CREDENTIAL_PASS"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="9">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_CREDENTIAL_PASSWORD"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_CGENERAL_EMAIL_ADDRESS"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="9">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CGENERAL_EMAIL_ADDRESS"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_LSUPPORT_SSL"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="3">
+                        <R_CheckBox @bind-Value="@SMTPViewModel.Data.LSUPPORT_SSL"
+                                    R_ConductorSource="@_conductorRef"
+                                    R_EnableAdd="true"
+                                    R_EnableEdit="true"></R_CheckBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_API"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="3">
+                        <R_CheckBox @bind-Value="@SMTPViewModel.Data.LAPI"
+                                    R_ConductorSource="@_conductorRef"
+                                    R_EnableAdd="true"
+                                    R_EnableEdit="true"></R_CheckBox>
+                    </R_Column>
+                </R_Row>
+            </R_Column>
+        </R_Row>
+    </R_CardContent>
+
+    @*<R_CardAction>
+        <R_AddButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_AddButton>
+        <R_EditButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_EditButton>
+        <R_DeleteButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_DeleteButton>
+        <R_SaveButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_SaveButton>
+        <R_CancelButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_CancelButton>
+    </R_CardAction>*@
+</R_Card>
+
+<!--<TelerikCard>
+    <CardHeader>
+        <CardTitle>@_localizer["_HeaderGroupBox"]</CardTitle>
+    </CardHeader>
+
+    <CardBody>
+        <R_Row>
+            <R_Column ColumnSize="6">
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_CSMTP_ID"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="10">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_ID"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="false"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_CSMTP_SERVER"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="10">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_SERVER"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_CSMTP_PORT"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="10">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_PORT"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_Created"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="4">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CCREATE_BY"
+                                   R_ConductorSource="@_conductorRef"
+                                   Enabled="false"></R_TextBox>
+                    </R_Column>
+                    <R_Column ColumnSize="6">
+                        <R_DateTimePicker @bind-Value="@SMTPViewModel.Data.DCREATE_DATE"
+                                          R_ConductorSource="@_conductorRef"
+                                          Enabled="false"></R_DateTimePicker>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="2">
+                        <R_Label>@_localizer["_Updated"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="4">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CUPDATE_BY"
+                                   R_ConductorSource="@_conductorRef"
+                                   Enabled="false"></R_TextBox>
+                    </R_Column>
+                    <R_Column ColumnSize="6">
+                        <R_DateTimePicker @bind-Value="@SMTPViewModel.Data.DUPDATE_DATE"
+                                          R_ConductorSource="@_conductorRef"
+                                          Enabled="false"></R_DateTimePicker>
+                    </R_Column>
+                </R_Row>
+            </R_Column>
+
+            <R_Column ColumnSize="6">
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_CSMTP_CREDENTIAL_USER"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="9">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_CREDENTIAL_USER"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_CSMTP_CREDENTIAL_PASS"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="9">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CSMTP_CREDENTIAL_PASSWORD"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_CGENERAL_EMAIL_ADDRESS"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="9">
+                        <R_TextBox @bind-Value="@SMTPViewModel.Data.CGENERAL_EMAIL_ADDRESS"
+                                   R_ConductorSource="@_conductorRef"
+                                   R_EnableAdd="true"
+                                   R_EnableEdit="true"></R_TextBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_LSUPPORT_SSL"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="3">
+                        <R_CheckBox @bind-Value="@SMTPViewModel.Data.LSUPPORT_SSL"
+                                    R_ConductorSource="@_conductorRef"
+                                    R_EnableAdd="true"
+                                    R_EnableEdit="true"></R_CheckBox>
+                    </R_Column>
+                </R_Row>
+
+                <R_Row>
+                    <R_Column ColumnSize="3">
+                        <R_Label>@_localizer["_API"]</R_Label>
+                    </R_Column>
+                    <R_Column ColumnSize="3">
+                        <R_CheckBox @bind-Value="@SMTPViewModel.Data.LAPI"
+                                    R_ConductorSource="@_conductorRef"
+                                    R_EnableAdd="true"
+                                    R_EnableEdit="true"></R_CheckBox>
+                    </R_Column>
+                </R_Row>
+            </R_Column>
+        </R_Row>
+    </CardBody>
+
+    <CardActions>
+        <R_AddButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_AddButton>
+        <R_EditButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_EditButton>
+        <R_DeleteButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_DeleteButton>
+        <R_SaveButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_SaveButton>
+        <R_CancelButton R_Conductor="@_conductorRef" Class="R_Button-bottom"></R_CancelButton>-->
+        @*<R_Detail R_ConductorSource="@_conductorRef" 
+                  R_Before_Open_Form="@R_Before_Open_Form"></R_Detail>*@
+    <!--</CardActions>
+</TelerikCard>-->
+
+<R_Conductor @ref="@_conductorRef" 
+             R_IsHeader 
+             R_BeforeAdd="@Conductor_R_BeforeAdd"
+             R_AfterAdd="@Conductor_R_AfterAdd" 
+             R_Display="@Conductor_R_Display" 
+             R_BeforeCancel="@Conductor_R_BeforeCancel" 
+             R_ServiceGetRecord="@Conductor_R_ServiceGetRecord" 
+             R_BeforeEdit="@Conductor_R_BeforeEdit" 
+             R_BeforeDelete="@Conductor_R_BeforeDelete" 
+             R_ServiceDelete="@Conductor_R_ServiceDelete" 
+             R_AfterDelete="@Conductor_R_AfterDelete" 
+             R_Validation="@Conductor_R_Validation" 
+             R_Saving="@Conductor_R_Saving" 
+             R_ServiceSave="@Conductor_R_ServiceSave" 
+             R_ConvertToGridEntity="@Conductor_R_ConvertToGridEntity" 
+             R_AfterSave="@Conductor_R_AfterSave"
+             R_ViewModel="@SMTPViewModel"></R_Conductor>
+
+<style>
+    .k-card-header {
+        padding: 5px 10px;
+    }
+
+    .k-card-body {
+        padding: 5px 5px;
+    }
+
+    .k-card-actions {
+        padding: 3px 5px;
+    }
+
+    .R_Button-bottom {
+        width: 80px !important;
+    }
+</style>

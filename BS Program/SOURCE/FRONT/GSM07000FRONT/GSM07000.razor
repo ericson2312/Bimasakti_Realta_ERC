@@ -1,0 +1,49 @@
+﻿@page "/GSM07000"
+@attribute [R_Page(Title = "Activity Approval")]
+@inherits R_Page
+@using GSM07000COMMON.DTOs
+
+<R_StackLayout Row>
+    <R_ItemLayout col="12">
+        <R_Grid @ref="@_gridRef"
+                DataSource="@loViewModel.loActivityApprovalList"
+                Pageable="true"
+                R_ConductorGridSource="@_conGridRef"
+                R_GridType="@R_eGridType.Original"
+                AllowAddNewRow="false"
+                AllowEditRow="true"
+                AllowDeleteRow="false"
+                Height="410px"
+                R_ServiceGetListRecord="@Grid_R_ServiceGetListRecord">
+            <R_GridColumns>
+                <R_GridComboBoxColumn Data="@loViewModel._approvalRtn"
+                                          ValueField="@nameof(ApprovalDTO.CCODE)"
+                                          TextField="@nameof(ApprovalDTO.CDESCRIPTION)"
+                                          FieldName="@nameof(GSM07000DTO.CAPPROVAL_OPTION)"
+                                      HeaderText="@_localizer["_ApprovalFlag"]"
+                                          Width="150px"
+                                                            R_EnableEdit />
+                <R_GridTextColumn FieldName=@nameof(GSM07000DTO.CAPPROVAL_NAME) HeaderText="@_localizer["_ApprovalDescription"]" Width="200px"></R_GridTextColumn>
+                <R_GridTextColumn FieldName=@nameof(GSM07000DTO.CAPPROVAL_CODE) HeaderText="@_localizer["_ApprovalCode"]" Width="150px"></R_GridTextColumn>
+                <R_GridTextColumn FieldName=@nameof(GSM07000DTO.CAPV_LOG_GRP) HeaderText="@_localizer["_Group"]" Width="150px"></R_GridTextColumn>
+                <R_GridTextColumn FieldName=@nameof(GSM07000DTO.CUPDATE_BY) HeaderText="@_localizer["_UpdatedBy"]" Width="150px"></R_GridTextColumn>
+                <R_GridDatePickerColumn FieldName=@nameof(GSM07000DTO.DUPDATE_DATE) HeaderText="@_localizer["_UpdatedDate"]" Width="150px"></R_GridDatePickerColumn>
+            </R_GridColumns>
+        </R_Grid>
+    </R_ItemLayout>
+</R_StackLayout>
+
+
+<R_PredefinedDock R_InstantiateDock="@PreDock_InstantiateDock" 
+                  R_AfterOpenPredefinedDock="@R_AfterOpenPredefinedDock"
+                  Enabled="@IsListExist"
+                  Title=@_localizer["_ActivityApprovalUser"]></R_PredefinedDock>
+
+<R_ConductorGrid @ref="@_conGridRef"
+                 R_ViewModel="@loViewModel"
+                 R_IsHeader
+                 R_Display="@Grid_Display"
+                 R_ServiceGetRecord="@Grid_ServiceGetRecord"
+                 R_ServiceSave="@Grid_ServiceSave"
+                 ></R_ConductorGrid>
+

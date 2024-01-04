@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<inherited BaseReport="BaseHeaderCommon.frx" BaseReportAbsolutePath="D:\Fake\Future1\BIMASAKTI_11\BIMASAKTI_11\1.00\PROGRAM\BS Program\SOURCE\API\AP\BIMASAKTI_AP_API\Reports\BaseHeaderCommon.frx" ScriptLanguage="CSharp" ReportInfo.Created="08/04/2023 16:21:34" ReportInfo.Modified="12/19/2023 09:42:12" ReportInfo.CreatorVersion="2023.2.21.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void PageHeader1_AfterData(object sender, EventArgs e)
+    {
+      string BaseHeaderCode = (string)Report.GetColumnValue(&quot;ResponseDataModel.BaseHeaderData.CPRINT_CODE&quot;);
+      string BaseHeaderName = (string)Report.GetColumnValue(&quot;ResponseDataModel.BaseHeaderData.CCOMPANY_NAME&quot;);
+      
+      if (string.IsNullOrWhiteSpace(BaseHeaderCode))
+      {
+		     Text33.Text = BaseHeaderName;
+      }else
+      {
+         Text33.Text = BaseHeaderCode + &quot; - &quot; + BaseHeaderName;
+      }
+    }
+    
+    private void Data1_AfterLayout(object sender, EventArgs e)
+    { 
+      No.Height = ProdName.Height + DetailDesc.Height;      
+      ProdId.Height = ProdName.Height;
+      Quantity.Height = ProdName.Height;
+      Unit.Height = ProdName.Height;
+      UnitPrice.Height = ProdName.Height;
+      TotalPrice.Height = ProdName.Height;
+      Discount.Height = ProdName.Height;
+      AddOn.Height = ProdName.Height;
+      Amount.Height = ProdName.Height; 
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <BusinessObjectDataSource Name="ResponseDataModel" ReferenceName="ResponseDataModel" DataType="System.Collections.ArrayList" Enabled="true">
+      <Column Name="ReportData" DataType="APT00100COMMON.DTOs.APT00110Print.APT00110PrintReportResultDTO, APT00100COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="Column" DataType="APT00100COMMON.DTOs.APT00110Print.APT00110PrintReportColumnDTO, APT00100COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Column Name="CREF_NO" DataType="System.String"/>
+          <Column Name="CREF_DATE" DataType="System.String"/>
+          <Column Name="CDOC_NO" DataType="System.String"/>
+          <Column Name="CDOC_DATE" DataType="System.String"/>
+          <Column Name="CSUPPLIER_NAME" DataType="System.String"/>
+          <Column Name="CSUPPLIER_ADDRESS" DataType="System.String"/>
+          <Column Name="CCURRENCY_CODE" DataType="System.String"/>
+          <Column Name="CPAY_TERM_NAME" DataType="System.String"/>
+          <Column Name="CSUPPLIER_PHONE_FAX1" DataType="System.String"/>
+          <Column Name="CSUPPLIER_EMAIL1" DataType="System.String"/>
+          <Column Name="INO" DataType="System.String"/>
+          <Column Name="CPRODUCT_ID_NAME" DataType="System.String"/>
+          <Column Name="NTRANS_QTY_CUNIT" DataType="System.String"/>
+          <Column Name="NUNIT_PRICE" DataType="System.String"/>
+          <Column Name="NLINE_AMOUNT" DataType="System.String"/>
+          <Column Name="NTOTAL_DISCOUNT" DataType="System.String"/>
+          <Column Name="NDIST_ADD_ON" DataType="System.String"/>
+          <Column Name="NLINE_TAXABLE_AMOUNT" DataType="System.String"/>
+          <Column Name="CTOTAL_AMOUNT_IN_WORDS" DataType="System.String"/>
+          <Column Name="CTRANS_DESC" DataType="System.String"/>
+          <Column Name="NTAXABLE_AMOUNT" DataType="System.String"/>
+          <Column Name="NTAX" DataType="System.String"/>
+          <Column Name="NOTHER_TAX" DataType="System.String"/>
+          <Column Name="NADDITION" DataType="System.String"/>
+          <Column Name="NDEDUCTION" DataType="System.String"/>
+          <Column Name="NTRANS_AMOUNT" DataType="System.String"/>
+          <Column Name="CGLACCOUNT_NO" DataType="System.String"/>
+          <Column Name="CGLACCOUNT_NAME" DataType="System.String"/>
+          <Column Name="CCENTER" DataType="System.String"/>
+          <Column Name="CDEBIT" DataType="System.String"/>
+          <Column Name="CCREDIT" DataType="System.String"/>
+          <Column Name="CSUB_CURRENCY" DataType="System.String"/>
+          <Column Name="CGRAND_TOTAL" DataType="System.String"/>
+        </Column>
+        <Column Name="Data" DataType="APT00100COMMON.DTOs.APT00110Print.APT00110PrintReportHeaderDTO, APT00100COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Column Name="CREF_NO" DataType="System.String"/>
+          <Column Name="CREF_DATE" DataType="System.String"/>
+          <Column Name="DREF_DATE" DataType="System.DateTime"/>
+          <Column Name="CDOC_NO" DataType="System.String"/>
+          <Column Name="CDOC_DATE" DataType="System.String"/>
+          <Column Name="DDOC_DATE" DataType="System.DateTime"/>
+          <Column Name="CSUPPLIER_NAME" DataType="System.String"/>
+          <Column Name="CSUPPLIER_ADDRESS" DataType="System.String"/>
+          <Column Name="CCURRENCY_CODE" DataType="System.String"/>
+          <Column Name="CPAY_TERM_NAME" DataType="System.String"/>
+          <Column Name="CSUPPLIER_PHONE1" DataType="System.String"/>
+          <Column Name="CSUPPLIER_FAX1" DataType="System.String"/>
+          <Column Name="CSUPPLIER_EMAIL1" DataType="System.String"/>
+          <Column Name="CJRN_ID" DataType="System.String"/>
+          <Column Name="FooterData" DataType="APT00100COMMON.DTOs.APT00110Print.APT00110PrintReportFooterDTO, APT00100COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <Column Name="CTOTAL_AMOUNT_IN_WORDS" DataType="System.String"/>
+            <Column Name="CTRANS_DESC" DataType="System.String"/>
+            <Column Name="NTAXABLE_AMOUNT" DataType="System.Decimal"/>
+            <Column Name="NTAX" DataType="System.Decimal"/>
+            <Column Name="NOTHER_TAX" DataType="System.Decimal"/>
+            <Column Name="NADDITION" DataType="System.Decimal"/>
+            <Column Name="NDEDUCTION" DataType="System.Decimal"/>
+            <Column Name="NTRANS_AMOUNT" DataType="System.Decimal"/>
+          </Column>
+          <BusinessObjectDataSource Name="BusinessObjectDataSource1" Alias="DetailData" DataType="System.Collections.Generic.List`1[[APT00100COMMON.DTOs.APT00110Print.APT00110PrintReportDetailDTO, APT00100COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="DetailData" Enabled="true">
+            <Column Name="INO" DataType="System.Int32"/>
+            <Column Name="CPRODUCT_ID" DataType="System.String"/>
+            <Column Name="CPRODUCT_NAME" DataType="System.String"/>
+            <Column Name="CDETAIL_DESC" DataType="System.String"/>
+            <Column Name="NTRANS_QTY" DataType="System.Decimal"/>
+            <Column Name="CUNIT" DataType="System.String"/>
+            <Column Name="NUNIT_PRICE" DataType="System.Decimal"/>
+            <Column Name="NLINE_AMOUNT" DataType="System.Decimal"/>
+            <Column Name="NTOTAL_DISCOUNT" DataType="System.Decimal"/>
+            <Column Name="NDIST_ADD_ON" DataType="System.Decimal"/>
+            <Column Name="NLINE_TAXABLE_AMOUNT" DataType="System.Decimal"/>
+          </BusinessObjectDataSource>
+        </Column>
+        <BusinessObjectDataSource Name="SubDetail" DataType="System.Collections.Generic.List`1[[APT00100COMMON.DTOs.APT00110Print.APT00110PrintReportSubDetailDTO, APT00100COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+          <Column Name="CGLACCOUNT_NO" DataType="System.String"/>
+          <Column Name="CGLACCOUNT_NAME" DataType="System.String"/>
+          <Column Name="CCENTER_NAME" DataType="System.String"/>
+          <Column Name="CCURRENCY_CODE" DataType="System.String"/>
+          <Column Name="NDEBIT" DataType="System.Decimal"/>
+          <Column Name="NCREDIT" DataType="System.Decimal"/>
+        </BusinessObjectDataSource>
+      </Column>
+      <Column Name="BaseHeaderData" DataType="BaseHeaderReportCOMMON.BaseHeaderDTO, BaseHeaderReportCOMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="BLOGO_COMPANY" DataType="System.Byte[]" BindableControl="Picture"/>
+        <Column Name="CPRINT_CODE" DataType="System.String"/>
+        <Column Name="CCOMPANY_NAME" DataType="System.String"/>
+        <Column Name="CPRINT_NAME" DataType="System.String"/>
+        <Column Name="CUSER_ID" DataType="System.String"/>
+      </Column>
+    </BusinessObjectDataSource>
+    <Total Name="TotalDebit" Expression="[ResponseDataModel.ReportData.SubDetail.NDEBIT]" Evaluator="Data2" PrintOn="DataFooter2"/>
+    <Total Name="TotalCredit" Expression="[ResponseDataModel.ReportData.SubDetail.NCREDIT]" Evaluator="Data2" PrintOn="DataFooter2"/>
+  </Dictionary>
+  <inherited Name="Page1">
+    <inherited Name="PageHeader1">
+      <inherited Name="Picture1"/>
+      <inherited Name="Text33"/>
+      <inherited Name="Text40">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </inherited>
+      <inherited Name="Text36"/>
+      <inherited Name="Text38"/>
+      <inherited Name="Text41"/>
+      <inherited Name="Text34"/>
+      <inherited Name="Text37"/>
+      <inherited Name="Text39"/>
+      <inherited Name="Text42"/>
+    </inherited>
+    <ColumnHeaderBand Name="ColumnHeader1" ZOrder="-1" Top="89.05" Width="718.2" Height="113.4" CanGrow="true">
+      <TextObject Name="Text43" Top="9.45" Width="113.4" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CREF_NO]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text44" Left="283.5" Top="9.45" Width="56.7" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CREF_DATE]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text45" Top="28.35" Width="113.4" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CDOC_NO]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text46" Left="283.5" Top="28.35" Width="56.7" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CDOC_DATE]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text47" Top="47.25" Width="113.4" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CSUPPLIER_NAME]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text48" Top="66.15" Width="113.4" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CSUPPLIER_ADDRESS]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text49" Left="434.7" Top="9.45" Width="85.05" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CCURRENCY_CODE]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text50" Left="434.7" Top="28.35" Width="85.05" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CPAY_TERM_NAME]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text51" Left="434.7" Top="66.15" Width="85.05" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CSUPPLIER_PHONE_FAX1]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text52" Left="434.7" Top="85.05" Width="85.05" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CSUPPLIER_EMAIL1]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text53" Left="113.4" Top="9.45" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text54" Left="113.4" Top="28.35" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text55" Left="113.4" Top="47.25" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text56" Left="113.4" Top="66.15" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text57" Left="519.75" Top="9.45" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text58" Left="519.75" Top="28.35" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text59" Left="519.75" Top="66.15" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text60" Left="519.75" Top="85.05" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text61" Left="340.2" Top="9.45" Width="94.5" Height="18.9" Text="[ResponseDataModel.ReportData.Data.DREF_DATE]" Format="Custom" Format.Format="dd-MMM-yyyy" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text62" Left="340.2" Top="28.35" Width="94.5" Height="18.9" Text="[ResponseDataModel.ReportData.Data.DDOC_DATE]" Format="Custom" Format.Format="dd-MMM-yyyy" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text63" Left="122.85" Top="9.45" Width="160.65" Height="18.9" Text="[ResponseDataModel.ReportData.Data.CREF_NO]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text64" Left="122.85" Top="28.35" Width="160.65" Height="18.9" Text="[ResponseDataModel.ReportData.Data.CDOC_NO]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text65" Left="122.85" Top="47.25" Width="311.85" Height="18.9" Text="[ResponseDataModel.ReportData.Data.CSUPPLIER_NAME]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text66" Left="122.85" Top="66.15" Width="311.85" Height="18.9" CanGrow="true" Text="[ResponseDataModel.ReportData.Data.CSUPPLIER_ADDRESS]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text67" Left="529.2" Top="28.35" Width="189" Height="18.9" Text="[ResponseDataModel.ReportData.Data.CPAY_TERM_NAME]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text68" Left="529.2" Top="9.45" Width="189" Height="18.9" Text="[ResponseDataModel.ReportData.Data.CCURRENCY_CODE]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text69" Left="529.2" Top="85.05" Width="189" Height="18.9" CanGrow="true" Text="[ResponseDataModel.ReportData.Data.CSUPPLIER_EMAIL1]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text70" Left="529.2" Top="66.15" Width="189" Height="18.9" CanGrow="true" Text="[ResponseDataModel.ReportData.Data.CSUPPLIER_PHONE1] / [ResponseDataModel.ReportData.Data.CSUPPLIER_FAX1]" VertAlign="Center" Font="Arial, 8pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" ZOrder="0" Top="229.35" Width="718.2" Height="37.8" Border.Lines="All" CanGrow="true" CanShrink="true" AfterLayoutEvent="Data1_AfterLayout" DataSource="BusinessObjectDataSource1">
+      <TextObject Name="No" Width="37.8" Height="37.8" Border.Lines="Right" Text="[ResponseDataModel.ReportData.Data.DetailData.INO]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="ProdId" Left="37.8" Width="75.6" Height="18.9" Text="[ResponseDataModel.ReportData.Data.DetailData.CPRODUCT_ID]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Quantity" Left="217.35" Width="47.25" Height="18.9" Border.Lines="Left, Bottom" Text="[ResponseDataModel.ReportData.Data.DetailData.NTRANS_QTY]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Unit" Left="264.6" Width="37.8" Height="18.9" Border.Lines="Bottom" Text="[ResponseDataModel.ReportData.Data.DetailData.CUNIT]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="UnitPrice" Left="302.4" Width="75.6" Height="18.9" Border.Lines="Left, Bottom" Text="[ResponseDataModel.ReportData.Data.DetailData.NUNIT_PRICE]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="TotalPrice" Left="378" Width="85.05" Height="18.9" Border.Lines="Left, Bottom" Text="[ResponseDataModel.ReportData.Data.DetailData.NLINE_AMOUNT]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Discount" Left="463.05" Width="85.05" Height="18.9" Border.Lines="Left, Bottom" Text="[ResponseDataModel.ReportData.Data.DetailData.NTOTAL_DISCOUNT]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="AddOn" Left="548.1" Width="85.05" Height="18.9" Border.Lines="Left" Text="[ResponseDataModel.ReportData.Data.DetailData.NDIST_ADD_ON]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Amount" Left="633.15" Width="85.05" Height="18.9" Border.Lines="Left, Bottom" Text="[ResponseDataModel.ReportData.Data.DetailData.NLINE_TAXABLE_AMOUNT]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="DetailDesc" Left="37.8" Top="18.9" Width="680.4" Height="18.9" Border.Lines="Top" CanGrow="true" Text="[ResponseDataModel.ReportData.Data.DetailData.CDETAIL_DESC]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="ProdName" Left="113.4" Width="103.95" Height="18.9" Border.Lines="Right" CanGrow="true" Text="[ResponseDataModel.ReportData.Data.DetailData.CPRODUCT_NAME]" VertAlign="Center" Font="Arial, 8pt"/>
+      <DataHeaderBand Name="DataHeader2" Top="206.45" Width="718.2" Height="18.9" RepeatOnEveryPage="true">
+        <TextObject Name="Text71" Width="37.8" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.INO]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text72" Left="37.8" Width="179.55" Height="18.9" Border.Lines="Left, Right, Top" Text="[ResponseDataModel.ReportData.Column.CPRODUCT_ID_NAME]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text73" Left="217.35" Width="85.05" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.NTRANS_QTY_CUNIT]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text74" Left="302.4" Width="75.6" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.NUNIT_PRICE]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text75" Left="378" Width="85.05" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.NLINE_AMOUNT]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text76" Left="463.05" Width="85.05" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.NTOTAL_DISCOUNT]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text77" Left="548.1" Width="85.05" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.NDIST_ADD_ON]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text78" Left="633.15" Width="85.05" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.NLINE_TAXABLE_AMOUNT]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      </DataHeaderBand>
+      <DataFooterBand Name="DataFooter1" Top="271.15" Width="718.2" Height="122.85">
+        <TextObject Name="Text79" Top="56.7" Width="75.6" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CTOTAL_AMOUNT_IN_WORDS]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text80" Top="94.5" Width="75.6" Height="18.9" Text="[ResponseDataModel.ReportData.Column.CTRANS_DESC]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text81" Left="529.2" Width="94.5" Height="18.9" Border.Lines="Left" Text="[ResponseDataModel.ReportData.Column.NTAXABLE_AMOUNT]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text82" Left="529.2" Top="18.9" Width="94.5" Height="18.9" Border.Lines="Left" Text="[ResponseDataModel.ReportData.Column.NTAX]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text83" Left="529.2" Top="37.8" Width="94.5" Height="18.9" Border.Lines="Left" Text="[ResponseDataModel.ReportData.Column.NOTHER_TAX]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text84" Left="529.2" Top="56.7" Width="94.5" Height="18.9" Border.Lines="Left" Text="[ResponseDataModel.ReportData.Column.NADDITION]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text85" Left="529.2" Top="75.6" Width="94.5" Height="18.9" Border.Lines="Left" Text="[ResponseDataModel.ReportData.Column.NDEDUCTION]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text86" Left="529.2" Top="94.5" Width="94.5" Height="18.9" Border.Lines="Left, Top, Bottom" Text="[ResponseDataModel.ReportData.Column.NTRANS_AMOUNT]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text87" Left="623.7" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text88" Left="623.7" Top="18.9" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text89" Left="623.7" Top="37.8" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text90" Left="623.7" Top="56.7" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text91" Left="623.7" Top="75.6" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text92" Left="623.7" Top="94.5" Width="9.45" Height="18.9" Border.Lines="Top, Bottom" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text93" Left="75.6" Top="94.5" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text94" Left="75.6" Top="56.7" Width="9.45" Height="18.9" Text=":&#13;&#10;" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text95" Left="85.05" Top="56.7" Width="434.7" Height="18.9" CanGrow="true" Text="[ResponseDataModel.ReportData.Data.FooterData.CTOTAL_AMOUNT_IN_WORDS]" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text96" Left="85.05" Top="94.5" Width="434.7" Height="18.9" CanGrow="true" Text="[ResponseDataModel.ReportData.Data.FooterData.CTRANS_DESC]" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text97" Left="633.15" Width="85.05" Height="18.9" Border.Lines="Right" Text="[ResponseDataModel.ReportData.Data.FooterData.NTAXABLE_AMOUNT]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text98" Left="633.15" Top="18.9" Width="85.05" Height="18.9" Border.Lines="Right" Text="[ResponseDataModel.ReportData.Data.FooterData.NTAX]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text99" Left="633.15" Top="37.8" Width="85.05" Height="18.9" Border.Lines="Right" Text="[ResponseDataModel.ReportData.Data.FooterData.NOTHER_TAX]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text100" Left="633.15" Top="56.7" Width="85.05" Height="18.9" Border.Lines="Right" Text="[ResponseDataModel.ReportData.Data.FooterData.NADDITION]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text101" Left="633.15" Top="75.6" Width="85.05" Height="18.9" Border.Lines="Right" Text="[ResponseDataModel.ReportData.Data.FooterData.NDEDUCTION]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text102" Left="633.15" Top="94.5" Width="85.05" Height="18.9" Border.Lines="Right, Top, Bottom" Text="[ResponseDataModel.ReportData.Data.FooterData.NTRANS_AMOUNT]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt, style=Bold" Trimming="EllipsisCharacter"/>
+      </DataFooterBand>
+    </DataBand>
+    <DataBand Name="Data2" ZOrder="1" Top="420.9" Width="718.2" Height="18.9" DataSource="SubDetail">
+      <TextObject Name="Text108" Width="94.5" Height="18.9" Border.Lines="Left, Right" Text="[ResponseDataModel.ReportData.SubDetail.CGLACCOUNT_NO]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text109" Left="94.5" Width="189" Height="18.9" Border.Lines="Left, Right" Text="[ResponseDataModel.ReportData.SubDetail.CGLACCOUNT_NAME]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text110" Left="283.5" Width="189" Height="18.9" Border.Lines="Left, Right" Text="[ResponseDataModel.ReportData.SubDetail.CCENTER_NAME]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text111" Left="472.5" Width="56.7" Height="18.9" Border.Lines="Left, Right" Text="[ResponseDataModel.ReportData.SubDetail.CCURRENCY_CODE]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text112" Left="529.2" Width="94.5" Height="18.9" Border.Lines="Left, Right" Text="[ResponseDataModel.ReportData.SubDetail.NDEBIT]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text113" Left="623.7" Width="94.5" Height="18.9" Border.Lines="Left, Right" Text="[ResponseDataModel.ReportData.SubDetail.NCREDIT]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <DataHeaderBand Name="DataHeader1" Top="398" Width="718.2" Height="18.9" RepeatOnEveryPage="true">
+        <TextObject Name="Text103" Width="94.5" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.CGLACCOUNT_NO]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text104" Left="94.5" Width="189" Height="18.9" Border.Lines="Right, Top, Bottom" Text="[ResponseDataModel.ReportData.Column.CGLACCOUNT_NAME]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text105" Left="283.5" Width="189" Height="18.9" Border.Lines="Right, Top, Bottom" Text="[ResponseDataModel.ReportData.Column.CCENTER]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text106" Left="529.2" Width="94.5" Height="18.9" Border.Lines="Left, Top, Bottom" Text="[ResponseDataModel.ReportData.Column.CDEBIT]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text107" Left="623.7" Width="94.5" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.CCREDIT]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text114" Left="472.5" Width="56.7" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.CSUB_CURRENCY]" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      </DataHeaderBand>
+      <DataFooterBand Name="DataFooter2" Top="443.8" Width="718.2" Height="37.8">
+        <TextObject Name="Text115" Width="529.2" Height="18.9" Border.Lines="All" Text="[ResponseDataModel.ReportData.Column.CGRAND_TOTAL]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text116" Left="529.2" Width="94.5" Height="18.9" Border.Lines="All" Text="[TotalDebit]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text117" Left="623.7" Width="94.5" Height="18.9" Border.Lines="All" Text="[TotalCredit]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      </DataFooterBand>
+    </DataBand>
+  </inherited>
+</inherited>

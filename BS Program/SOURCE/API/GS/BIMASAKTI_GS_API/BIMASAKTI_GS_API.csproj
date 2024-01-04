@@ -1,0 +1,136 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="WeatherForecast.cs" />
+  </ItemGroup>
+	
+  <ItemGroup>
+	<Folder Include="Template\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Template\Center.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Template\Floor.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Template\Unit Promotion Type.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Template\Unit Promotion.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Template\Unit Type Category.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Template\Unit Type.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Template\Unit Utility.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Template\Unit.xlsx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+
+
+	<ItemGroup>
+    <PackageReference Include="Realta.BackCollectionNuGet" Version="1.0.0" />
+    <PackageReference Include="Realta.CommonCollectionNuGet" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\BS Shared Form\SOURCE\SERVICES\GFF00900SERVICES\GFF00900SERVICES.csproj" />
+    <ProjectReference Include="..\..\..\..\..\BS Shared Form\SOURCE\SERVICES\Lookup_GSSERVICES\Lookup_GSSERVICES.csproj" />
+    <ProjectReference Include="..\..\..\SERVICE\GS\GSM01500SERVICE\GSM01500SERVICE.csproj" />
+    <ProjectReference Include="..\..\..\SERVICE\GS\GSM02200SERVICE\GSM02200SERVICE.csproj" />
+    <ProjectReference Include="..\..\..\SERVICE\GS\GSM02500SERVICE\GSM02500SERVICE.csproj" />
+    <ProjectReference Include="..\..\..\SERVICE\GS\GSM03000SERVICE\GSM03000SERVICE.csproj" />
+    <ProjectReference Include="..\..\..\SERVICE\GS\GSM07000SERVICE\GSM07000SERVICE.csproj" />
+	<ProjectReference Include="..\..\..\SERVICE\GS\GSM09000SERVICE\GSM09000SERVICE.csproj" />
+	<ProjectReference Include="..\..\..\SERVICE\GS\GSM09200SERVICE\GSM09200SERVICE.csproj" />
+	<ProjectReference Include="..\..\..\SERVICE\GS\GSM09300SERVICE\GSM09300SERVICE.csproj" />
+    <ProjectReference Include="..\..\..\SERVICE\SA\SAB02400Service\SAB02400Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BackExtension">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\BackExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="BlazorMenuBack">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\BlazorMenuBack.dll</HintPath>
+    </Reference>
+    <Reference Include="BlazorMenuCommon">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\BlazorMenuCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="BlazorMenuService">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\BlazorMenuService.dll</HintPath>
+    </Reference>
+    <Reference Include="R_APIStartUp">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\Back\R_APIStartUp.dll</HintPath>
+    </Reference>
+    <Reference Include="R_CrossPlatformSecurity">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\Back\R_CrossPlatformSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="R_HelperController">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\Back\R_HelperController.dll</HintPath>
+    </Reference>
+    <Reference Include="R_SecurityPolicyBack">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\R_SecurityPolicyBack.dll</HintPath>
+    </Reference>
+    <Reference Include="R_SecurityPolicyCommon">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\R_SecurityPolicyCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="R_SecurityPolicyService">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\R_SecurityPolicyService.dll</HintPath>
+    </Reference>
+    <Reference Include="R_SecurityTokenBack">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\R_SecurityTokenBack.dll</HintPath>
+    </Reference>
+    <Reference Include="R_SecurityTokenCommon">
+      <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\MenuBack\R_SecurityTokenCommon.dll</HintPath>
+    </Reference>
+	  <Reference Include="R_Storage">
+		  <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\Back\R_Storage.dll</HintPath>
+	  </Reference>
+	  <Reference Include="R_StorageCommon">
+		  <HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\Back\R_StorageCommon.dll</HintPath>
+	  </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Reports\BaseHeaderCommon.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\BaseHeaderLandscapeCommon.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\GSM01500PrintCenter.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

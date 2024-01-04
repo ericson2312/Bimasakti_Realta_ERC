@@ -1,0 +1,26 @@
+3501 = Error process, please contact your administrator!
+3502 = Duplicate Tenant Id!
+3503 = Cannot Delete, Tenant already in used
+3504 = Tenant Id cannot be empty!
+3505 = Tenant Name cannot be empty!
+3506 = Tenant Id cannot be greater than 20 character!
+3507 = Tenant Name cannot be greater than 100 character!
+3508 = Address cannot be empty!
+3509 = Tenant Group cannot be empty!
+3510 = Invalid Tenant Group!
+3511 = Tenant Category cannot be empty!
+3523 = Invalid Tenant Category!
+3524 = Tenant Type cannot be empty!
+3512 = Invalid Tenant Type!
+3513 = Journal Group cannot be empty!
+3514 = Invalid Journal Group!
+3515 = Payment Term cannot be empty!
+3516 = Invalid Payment Term!
+3517 = Currency cannot be empty!
+3518 = Invalid Currency!
+3519 = Salesman cannot be empty!
+3520 = Invalid Salesman!
+3521 = Line of Business cannot be empty!
+3522 = Invalid Line of Business!
+
+

@@ -1,0 +1,109 @@
+﻿@inherits R_Page
+@using GLM00400COMMON
+
+<R_StackLayout Style="width: 700px">
+    <R_StackLayout Row Class="mb-2">
+        <R_ItemLayout col="2">
+            <R_Label>Allocation</R_Label>
+        </R_ItemLayout>
+        <R_ItemLayout col="3">
+            <R_TextBox @bind-Value="@AllocID"
+                       Enabled="false">
+            </R_TextBox>
+        </R_ItemLayout>
+        <R_ItemLayout col="5">
+            <R_TextBox @bind-Value="@AllocName"
+                       Enabled="false">
+            </R_TextBox>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+    <R_StackLayout Row>
+        <R_ItemLayout col="5">
+            <R_GroupBox Title="Avaiblable Centers">
+                <R_Grid @ref="@_SourceAllocationCenter_gridRef"
+                        DataSource="@_SourceAllocationCenter_viewModel.SourceAllocationCenterGrid"
+                        R_GridType="@R_eGridType.Batch"
+                        R_ServiceGetListRecord="@Allocation_Center_Source_ServiceGetListRecord"
+                        R_ConductorGridSource="@_SourceAllocationCenter_conGrid"
+                        DragClueField="@nameof(GLM00420DTO.CCENTER_NAME)"
+                        DragDrop
+                        AllowAddNewRow="false"
+                        AllowEditRow
+                        AllowDeleteRow
+                        TargetGridDrop="@_SourceAllocationCenter_gridRef"
+                        Pageable="true"
+                        R_GridRowBeforeDrop="@R_GridRowBeforeDrop"
+                        R_GridRowAfterDrop="@R_GridRowAfterDrop"
+                        Height="250px">
+                    <R_GridColumns>
+                        <R_GridTextColumn FieldName="CCENTER_CODE" HeaderText="Center Code" Width="150px"></R_GridTextColumn>
+                        <R_GridTextColumn FieldName="CCENTER_NAME" HeaderText="Center Name" Width="300px"></R_GridTextColumn>
+                    </R_GridColumns>
+                </R_Grid>
+                </R_GroupBox>
+                </R_ItemLayout>
+        <R_ItemLayout col="2" >
+            @*Spasing*@
+            <R_StackLayout Row><R_ItemLayout col="12"><R_Label>  </R_Label></R_ItemLayout></R_StackLayout>
+            <R_StackLayout Row><R_ItemLayout col="12"><R_Label>  </R_Label></R_ItemLayout></R_StackLayout>
+            <R_StackLayout Row><R_ItemLayout col="12"><R_Label>  </R_Label></R_ItemLayout></R_StackLayout>
+            <R_StackLayout Row><R_ItemLayout col="12"><R_Label>  </R_Label></R_ItemLayout></R_StackLayout>
+            <R_StackLayout Row><R_ItemLayout col="12"><R_Label>  </R_Label></R_ItemLayout></R_StackLayout>
+
+            <R_StackLayout Row Class="d-flex justify-content-center">
+                    <R_Button R_ConductorGridSource="@_SourceAllocationCenter_conGrid" OnClick="@Allocation_BtnAllMoveRight"> >> </R_Button>
+            </R_StackLayout>
+            <R_StackLayout Row Class="d-flex justify-content-center">
+                    <R_Button R_ConductorGridSource="@_SourceAllocationCenter_conGrid" OnClick="@Allocation_BtnMoveRight"> > </R_Button>
+            </R_StackLayout>
+            <R_StackLayout Row Class="d-flex justify-content-center">
+                    <R_Button R_ConductorGridSource="@_AllocationCenterPeriod_conGrid" OnClick="@Allocation_BtnAllMoveLeft"> @label1 </R_Button>
+            </R_StackLayout>
+            <R_StackLayout Row Class="d-flex justify-content-center">
+                    <R_Button R_ConductorGridSource="@_AllocationCenterPeriod_conGrid" OnClick="@Allocation_BtnMoveLeft"> @label2 </R_Button>
+            </R_StackLayout>
+        </R_ItemLayout>
+        <R_ItemLayout col="5">
+            <R_GroupBox Title="Selected Centers">
+                <R_Grid @ref="@_AllocationCenterPeriod_gridRef"
+                        DataSource="@_SourceAllocationCenter_viewModel.AllocationCenterGrid"
+                        R_GridType="@R_eGridType.Batch"
+                        R_ServiceGetListRecord="@Allocation_Center_ServiceGetListRecord"
+                        R_ConductorGridSource="@_AllocationCenterPeriod_conGrid"
+                        DragClueField="@nameof(GLM00420DTO.CCENTER_NAME)"
+                        DragDrop
+                        AllowAddNewRow="false"
+                        AllowEditRow
+                        AllowDeleteRow
+                        TargetGridDrop="@_AllocationCenterPeriod_gridRef"
+                        Pageable="true"
+                        R_GridRowBeforeDrop="@R_GridRowBeforeDrop"
+                        R_GridRowAfterDrop="@R_GridRowAfterDrop"
+                        Height="250px">
+                    <R_GridColumns>
+                        <R_GridTextColumn FieldName="CCENTER_CODE" HeaderText="Center Code" Width="150px"></R_GridTextColumn>
+                        <R_GridTextColumn FieldName="CCENTER_NAME" HeaderText="Center Name" Width="300px"></R_GridTextColumn>
+                    </R_GridColumns>
+                </R_Grid>
+                </R_GroupBox>
+                </R_ItemLayout>
+                </R_StackLayout>
+
+    <R_StackLayout Row>
+        <R_ItemLayout col="4">
+            <R_Button Enabled="@HasMove" OnClick="@BtnProcess">Process</R_Button>
+            <R_Button OnClick="@BtnClose">Close</R_Button>
+        </R_ItemLayout>
+    </R_StackLayout>
+</R_StackLayout>
+<R_ConductorGrid @ref="@_SourceAllocationCenter_conGrid"
+                 R_ViewModel="@_SourceAllocationCenter_viewModel"
+                 R_IsHeader
+                 R_ServiceGetRecord="@R_ServiceGetRecord" />
+
+<R_ConductorGrid @ref="@_AllocationCenterPeriod_conGrid"
+                 R_ViewModel="@_SourceAllocationCenter_viewModel"
+                 R_IsHeader
+                 R_ServiceGetRecord="@R_ServiceGetRecord"
+                 R_ServiceSaveBatch="@R_ServiceSaveBatch" />

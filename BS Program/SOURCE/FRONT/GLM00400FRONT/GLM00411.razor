@@ -1,0 +1,71 @@
+﻿@inherits R_Page
+
+<R_StackLayout Row>
+    <R_ItemLayout col="6">
+        <R_Grid @ref="@_AllocationCenter_gridRef"
+                DataSource="@_AllocationTargetCenter_viewModel.AllocationCenterGrid"
+                R_GridType="@R_eGridType.Navigator"
+                R_ServiceGetListRecord="@Allocation_Center_ServiceGetListRecord"
+                Pageable="true"
+                R_ConductorSource="@_AllocationCenter_condutorRef"
+                Height="160px">
+            <R_GridColumns>
+                <R_GridTextColumn FieldName="CCENTER_CODE" HeaderText="Center Code"></R_GridTextColumn>
+                <R_GridTextColumn FieldName="CCENTER_NAME" HeaderText="Center Name"></R_GridTextColumn>
+            </R_GridColumns>
+        </R_Grid>
+    </R_ItemLayout>
+    <R_ItemLayout col="6">
+        <R_StackLayout Row>
+            <R_ItemLayout col="4">
+                <R_Label FontColor="@R_eFontColor.Primary"><strong>Allocation</strong></R_Label>
+            </R_ItemLayout>
+        </R_StackLayout>
+        <R_StackLayout Row>
+            <R_ItemLayout col="3">
+                <R_Label>Target Center</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout col="6">
+                <R_TextBox @bind-Value="@_AllocationTargetCenter_viewModel.Data.CCENTER_NAME" Enabled="false" R_ConductorSource="@_AllocationCenter_condutorRef"></R_TextBox>
+            </R_ItemLayout>
+        </R_StackLayout>
+        <R_StackLayout Row>
+            <R_ItemLayout col="3">
+                <R_Label>Allocation Year</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout col="5">
+                <R_NumericTextBox ThousandSeparator="false" @bind-Value="@_AllocationTargetCenter_viewModel.Year"></R_NumericTextBox>
+            </R_ItemLayout>
+            <R_ItemLayout col="2">
+               <R_Button R_ConductorSource="@_AllocationCenter_condutorRef" OnClick="@_AllocationTargetCenter_Refresh_OnClick" R_EnableHasData>Refresh</R_Button>
+            </R_ItemLayout>
+        </R_StackLayout>
+        <R_StackLayout Row>
+            <R_ItemLayout col="12">
+                <R_Grid @ref="@_AllocationCenterPeriod_gridRef"
+                        DataSource="@_AllocationTargetCenter_viewModel.AllocationCenterPeriodGrid"
+                        R_ServiceGetListRecord="@Allocation_CenterPeriod_ServiceGetListRecord"
+                        Pageable="true"
+                        Height="120px">
+                    <R_GridColumns>
+                        <R_GridTextColumn FieldName="CYEAR" HeaderText="Year"></R_GridTextColumn>
+                        <R_GridTextColumn FieldName="CPERIOD_NO" HeaderText="Period"></R_GridTextColumn>
+                        <R_GridNumericColumn FieldName="NVALUE" HeaderText="Formula Value"></R_GridNumericColumn>
+                    </R_GridColumns>
+                </R_Grid>
+            </R_ItemLayout>
+        </R_StackLayout>
+    </R_ItemLayout>
+</R_StackLayout>
+<R_StackLayout Row>
+    <R_ItemLayout col="2">
+        <R_Popup R_Before_Open_Popup="@Allocation_CenterPeriod_Before_Open_Popup" R_After_Open_Popup="@Allocation_Center_After_Open_Popup" R_ConductorSource="@_AllocationCenter_condutorRef" Enabled="@_SetHasDataDT">Edit Account</R_Popup>
+    </R_ItemLayout>
+</R_StackLayout>
+
+<R_Conductor @ref="@_AllocationCenter_condutorRef"
+             R_ViewModel="@_AllocationTargetCenter_viewModel"
+             R_IsHeader="true" 
+             R_ServiceGetRecord="@Allocation_Center_ServiceGetRecord"
+             R_Display="@Allocation_Center_Display"
+             />

@@ -1,0 +1,32 @@
+﻿@inherits R_Page
+@attribute [R_Page(Title = "User List")]
+@using GSM09000COMMON.DTOs.GSM09001;
+@using GSM09001MODEL;
+
+<R_StackLayout Style="width:800px">
+    <R_StackLayout Row>
+        <R_ItemLayout col="12">
+            <R_Grid @ref="@_gridTenantCategoryRef"
+                    DataSource="loTenantCategoryViewModel.loTenantCategoryList"
+                    R_ServiceGetListRecord="R_ServiceGetListRecordAsync"
+                    Pageable
+                    PageSize="5">
+                <R_GridColumns>
+                    <R_GridTextColumn FieldName="@nameof(GetTenantCategoryDTO.CCATEGORY_ID)" HeaderText="@_localizer["_TenantCategoryId"]"></R_GridTextColumn>
+                    <R_GridTextColumn FieldName="@nameof(GetTenantCategoryDTO.CCATEGORY_NAME)" HeaderText="@_localizer["_TenantCategoryName"]"></R_GridTextColumn>
+                </R_GridColumns>
+            </R_Grid>
+        </R_ItemLayout>
+    </R_StackLayout>
+
+    <R_StackLayout Row Class="justify-content-end">
+        <R_ItemLayout>
+            <R_Button OnClick="Button_OnClickOk">
+                @_localizer["_OK"]
+            </R_Button>
+            <R_Button OnClick="Button_OnClickClose">
+                @_localizer["_Cancel"]
+            </R_Button>
+        </R_ItemLayout>
+    </R_StackLayout>
+</R_StackLayout>
